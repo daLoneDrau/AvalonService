@@ -18,7 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.osrapi.models.avalon.AVALONIoNpcDataEntity;
+import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
 import com.osrapi.models.avalon.AVALONGenderEntity;
+import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
+import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
+import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
+import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
+import com.osrapi.models.avalon.AVALONGroupEntity;
+import com.osrapi.models.avalon.AVALONIoItemDataEntity;
 
 import com.osrapi.repositories.avalon.AVALONIoNpcDataRepository;
 
@@ -123,9 +130,188 @@ public class AVALONIoNpcDataController {
     @RequestMapping(method = RequestMethod.POST)
     public List<Resource<AVALONIoNpcDataEntity>> save(
             @RequestBody final AVALONIoNpcDataEntity entity) {
-            if (entity.getGender() != null
+        if (entity.getGroups() != null
+                && !entity.getGroups().isEmpty()) {
+            for (int i = entity.getGroups().size() - 1; i >= 0; i--) {
+                AVALONGroupEntity groups = null;
+                List<Resource<AVALONGroupEntity>> list = null;
+                try {
+                    Method method = null;
+          try {
+            method = AVALONGroupController.class.getDeclaredMethod(
+                "getByName", new Class[] { String.class });
+          } catch (NoSuchMethodException e) {
+            System.out.println("Cannot get embedded lookup Entity AVALONGroupEntity from Controller by name");
+                    }
+                    Field field = null;
+          try {
+            field = AVALONGroupEntity.class
+                .getDeclaredField("name");
+          } catch (NoSuchFieldException e) {
+            System.out.println("Cannot get embedded lookup Entity AVALONGroupEntity from class by name");
+                    }
+                    if (method != null
+                            && field != null) {
+                        field.setAccessible(true);
+                        if (field.get(entity.getGroups().get(i)) != null) {
+                            list = (List<Resource<AVALONGroupEntity>>) method
+                                    .invoke(
+                                            AVALONGroupController.getInstance(),
+                                            (String) field.get(entity.getGroups().get(i)));
+                        }
+                    }
+                    if (list == null) {
+            try {
+              method = AVALONGroupController.class.getDeclaredMethod(
+                  "getByCode", new Class[] { String.class });
+            } catch (NoSuchMethodException e) {
+              System.out.println("Cannot get embedded lookup Entity AVALONGroupEntity from Controller by code");
+            }
+            try {
+              field = AVALONGroupEntity.class.getDeclaredField(
+                  "code");
+            } catch (NoSuchFieldException e) {
+              System.out.println("Cannot get embedded lookup Entity AVALONGroupEntity from class by code");
+            }
+                        if (method != null
+                                && field != null) {
+                            field.setAccessible(true);
+                            if (field.get(entity.getGroups().get(i)) != null) {
+                                list = (List<Resource<AVALONGroupEntity>>) method
+                                        .invoke(
+                                                AVALONGroupController
+                                                        .getInstance(),
+                                                (String) field
+                                                        .get(entity.getGroups().get(i)));
+                            }
+                        }
+                    }
+                    method = null;
+                    field = null;
+                } catch (SecurityException | IllegalArgumentException
+                        | IllegalAccessException
+                        | InvocationTargetException e) {
+              System.out.println("CANNOT get embedded lookup Entity AVALONGroupEntity by name or code");
+                }
+                if (list != null
+                        && !list.isEmpty()) {
+                    groups = list.get(0).getContent();
+                }
+                if (groups == null) {
+                    groups = (AVALONGroupEntity) ((Resource) AVALONGroupController
+                            .getInstance()
+                            .save(entity.getGroups().get(i)).get(0)).getContent();
+                }
+                entity.getGroups().set(i, groups);
+                list = null;
+            }
+        }
+
+    if (entity.getInventoryItems() != null
+                && !entity.getInventoryItems().isEmpty()) {
+            for (int i = entity.getInventoryItems().size() - 1; i >= 0; i--) {
+                AVALONIoItemDataEntity inventoryItems = null;
+                List<Resource<AVALONIoItemDataEntity>> list = null;
+                try {
+                    Method method = null;
+          try {
+            method = AVALONIoItemDataController.class.getDeclaredMethod(
+                "getByName", new Class[] { String.class });
+          } catch (NoSuchMethodException e) {
+            System.out.println("Cannot get embedded lookup Entity AVALONIoItemDataEntity from Controller by name");
+                    }
+                    Field field = null;
+          try {
+            field = AVALONIoItemDataEntity.class
+                .getDeclaredField("name");
+          } catch (NoSuchFieldException e) {
+            System.out.println("Cannot get embedded lookup Entity AVALONIoItemDataEntity from class by name");
+                    }
+                    if (method != null
+                            && field != null) {
+                        field.setAccessible(true);
+                        if (field.get(entity.getInventoryItems().get(i)) != null) {
+                            list = (List<Resource<AVALONIoItemDataEntity>>) method
+                                    .invoke(
+                                            AVALONIoItemDataController.getInstance(),
+                                            (String) field.get(entity.getInventoryItems().get(i)));
+                        }
+                    }
+                    if (list == null) {
+            try {
+              method = AVALONIoItemDataController.class.getDeclaredMethod(
+                  "getByCode", new Class[] { String.class });
+            } catch (NoSuchMethodException e) {
+              System.out.println("Cannot get embedded lookup Entity AVALONIoItemDataEntity from Controller by code");
+            }
+            try {
+              field = AVALONIoItemDataEntity.class.getDeclaredField(
+                  "code");
+            } catch (NoSuchFieldException e) {
+              System.out.println("Cannot get embedded lookup Entity AVALONIoItemDataEntity from class by code");
+            }
+                        if (method != null
+                                && field != null) {
+                            field.setAccessible(true);
+                            if (field.get(entity.getInventoryItems().get(i)) != null) {
+                                list = (List<Resource<AVALONIoItemDataEntity>>) method
+                                        .invoke(
+                                                AVALONIoItemDataController
+                                                        .getInstance(),
+                                                (String) field
+                                                        .get(entity.getInventoryItems().get(i)));
+                            }
+                        }
+                    }
+                    method = null;
+                    field = null;
+                } catch (SecurityException | IllegalArgumentException
+                        | IllegalAccessException
+                        | InvocationTargetException e) {
+              System.out.println("CANNOT get embedded lookup Entity AVALONIoItemDataEntity by name or code");
+                }
+                if (list != null
+                        && !list.isEmpty()) {
+                    inventoryItems = list.get(0).getContent();
+                }
+                if (inventoryItems == null) {
+                    inventoryItems = (AVALONIoItemDataEntity) ((Resource) AVALONIoItemDataController
+                            .getInstance()
+                            .save(entity.getInventoryItems().get(i)).get(0)).getContent();
+                }
+                entity.getInventoryItems().set(i, inventoryItems);
+                list = null;
+            }
+        }
+
+        if (entity.getAlertedAttackWeight() != null
+        && entity.getAlertedAttackWeight().getId() == null) {
+      setAlertedAttackWeightIdFromRepository(entity);
+        }
+
+        if (entity.getGender() != null
         && entity.getGender().getId() == null) {
       setGenderIdFromRepository(entity);
+        }
+
+        if (entity.getMoveStrength() != null
+        && entity.getMoveStrength().getId() == null) {
+      setMoveStrengthIdFromRepository(entity);
+        }
+
+        if (entity.getUnalertedAttackWeight() != null
+        && entity.getUnalertedAttackWeight().getId() == null) {
+      setUnalertedAttackWeightIdFromRepository(entity);
+        }
+
+        if (entity.getVulnerability() != null
+        && entity.getVulnerability().getId() == null) {
+      setVulnerabilityIdFromRepository(entity);
+        }
+
+        if (entity.getWeight() != null
+        && entity.getWeight().getId() == null) {
+      setWeightIdFromRepository(entity);
         }
 
 
@@ -223,9 +409,188 @@ public class AVALONIoNpcDataController {
         if (entity.getId() == null) {
             setIdFromRepository(entity);
         }
-            if (entity.getGender() != null
+        if (entity.getGroups() != null
+                && !entity.getGroups().isEmpty()) {
+            for (int i = entity.getGroups().size() - 1; i >= 0; i--) {
+                AVALONGroupEntity groups = null;
+                List<Resource<AVALONGroupEntity>> list = null;
+                try {
+                    Method method = null;
+          try {
+            method = AVALONGroupController.class.getDeclaredMethod(
+                "getByName", new Class[] { String.class });
+          } catch (NoSuchMethodException e) {
+            System.out.println("Cannot get embedded lookup Entity AVALONGroupEntity from Controller by name");
+                    }
+                    Field field = null;
+          try {
+            field = AVALONGroupEntity.class
+                .getDeclaredField("name");
+          } catch (NoSuchFieldException e) {
+            System.out.println("Cannot get embedded lookup Entity AVALONGroupEntity from class by name");
+                    }
+                    if (method != null
+                            && field != null) {
+                        field.setAccessible(true);
+                        if (field.get(entity.getGroups().get(i)) != null) {
+                            list = (List<Resource<AVALONGroupEntity>>) method
+                                    .invoke(
+                                            AVALONGroupController.getInstance(),
+                                            (String) field.get(entity.getGroups().get(i)));
+                        }
+                    }
+                    if (list == null) {
+            try {
+              method = AVALONGroupController.class.getDeclaredMethod(
+                  "getByCode", new Class[] { String.class });
+            } catch (NoSuchMethodException e) {
+              System.out.println("Cannot get embedded lookup Entity AVALONGroupEntity from Controller by code");
+            }
+            try {
+              field = AVALONGroupEntity.class.getDeclaredField(
+                  "code");
+            } catch (NoSuchFieldException e) {
+              System.out.println("Cannot get embedded lookup Entity AVALONGroupEntity from class by code");
+            }
+                        if (method != null
+                                && field != null) {
+                            field.setAccessible(true);
+                            if (field.get(entity.getGroups().get(i)) != null) {
+                                list = (List<Resource<AVALONGroupEntity>>) method
+                                        .invoke(
+                                                AVALONGroupController
+                                                        .getInstance(),
+                                                (String) field
+                                                        .get(entity.getGroups().get(i)));
+                            }
+                        }
+                    }
+                    method = null;
+                    field = null;
+                } catch (SecurityException | IllegalArgumentException
+                        | IllegalAccessException
+                        | InvocationTargetException e) {
+              System.out.println("CANNOT get embedded lookup Entity AVALONGroupEntity by name or code");
+                }
+                if (list != null
+                        && !list.isEmpty()) {
+                    groups = list.get(0).getContent();
+                }
+                if (groups == null) {
+                    groups = (AVALONGroupEntity) ((Resource) AVALONGroupController
+                            .getInstance()
+                            .save(entity.getGroups().get(i)).get(0)).getContent();
+                }
+                entity.getGroups().set(i, groups);
+                list = null;
+            }
+        }
+
+    if (entity.getInventoryItems() != null
+                && !entity.getInventoryItems().isEmpty()) {
+            for (int i = entity.getInventoryItems().size() - 1; i >= 0; i--) {
+                AVALONIoItemDataEntity inventoryItems = null;
+                List<Resource<AVALONIoItemDataEntity>> list = null;
+                try {
+                    Method method = null;
+          try {
+            method = AVALONIoItemDataController.class.getDeclaredMethod(
+                "getByName", new Class[] { String.class });
+          } catch (NoSuchMethodException e) {
+            System.out.println("Cannot get embedded lookup Entity AVALONIoItemDataEntity from Controller by name");
+                    }
+                    Field field = null;
+          try {
+            field = AVALONIoItemDataEntity.class
+                .getDeclaredField("name");
+          } catch (NoSuchFieldException e) {
+            System.out.println("Cannot get embedded lookup Entity AVALONIoItemDataEntity from class by name");
+                    }
+                    if (method != null
+                            && field != null) {
+                        field.setAccessible(true);
+                        if (field.get(entity.getInventoryItems().get(i)) != null) {
+                            list = (List<Resource<AVALONIoItemDataEntity>>) method
+                                    .invoke(
+                                            AVALONIoItemDataController.getInstance(),
+                                            (String) field.get(entity.getInventoryItems().get(i)));
+                        }
+                    }
+                    if (list == null) {
+            try {
+              method = AVALONIoItemDataController.class.getDeclaredMethod(
+                  "getByCode", new Class[] { String.class });
+            } catch (NoSuchMethodException e) {
+              System.out.println("Cannot get embedded lookup Entity AVALONIoItemDataEntity from Controller by code");
+            }
+            try {
+              field = AVALONIoItemDataEntity.class.getDeclaredField(
+                  "code");
+            } catch (NoSuchFieldException e) {
+              System.out.println("Cannot get embedded lookup Entity AVALONIoItemDataEntity from class by code");
+            }
+                        if (method != null
+                                && field != null) {
+                            field.setAccessible(true);
+                            if (field.get(entity.getInventoryItems().get(i)) != null) {
+                                list = (List<Resource<AVALONIoItemDataEntity>>) method
+                                        .invoke(
+                                                AVALONIoItemDataController
+                                                        .getInstance(),
+                                                (String) field
+                                                        .get(entity.getInventoryItems().get(i)));
+                            }
+                        }
+                    }
+                    method = null;
+                    field = null;
+                } catch (SecurityException | IllegalArgumentException
+                        | IllegalAccessException
+                        | InvocationTargetException e) {
+              System.out.println("CANNOT get embedded lookup Entity AVALONIoItemDataEntity by name or code");
+                }
+                if (list != null
+                        && !list.isEmpty()) {
+                    inventoryItems = list.get(0).getContent();
+                }
+                if (inventoryItems == null) {
+                    inventoryItems = (AVALONIoItemDataEntity) ((Resource) AVALONIoItemDataController
+                            .getInstance()
+                            .save(entity.getInventoryItems().get(i)).get(0)).getContent();
+                }
+                entity.getInventoryItems().set(i, inventoryItems);
+                list = null;
+            }
+        }
+
+        if (entity.getAlertedAttackWeight() != null
+        && entity.getAlertedAttackWeight().getId() == null) {
+      setAlertedAttackWeightIdFromRepository(entity);
+        }
+
+        if (entity.getGender() != null
         && entity.getGender().getId() == null) {
       setGenderIdFromRepository(entity);
+        }
+
+        if (entity.getMoveStrength() != null
+        && entity.getMoveStrength().getId() == null) {
+      setMoveStrengthIdFromRepository(entity);
+        }
+
+        if (entity.getUnalertedAttackWeight() != null
+        && entity.getUnalertedAttackWeight().getId() == null) {
+      setUnalertedAttackWeightIdFromRepository(entity);
+        }
+
+        if (entity.getVulnerability() != null
+        && entity.getVulnerability().getId() == null) {
+      setVulnerabilityIdFromRepository(entity);
+        }
+
+        if (entity.getWeight() != null
+        && entity.getWeight().getId() == null) {
+      setWeightIdFromRepository(entity);
         }
 
 
@@ -235,6 +600,68 @@ public class AVALONIoNpcDataController {
                 savedEntity.getId());
         savedEntity = null;
         return list;
+    }
+
+  private void setAlertedAttackWeightIdFromRepository(
+      final AVALONIoNpcDataEntity entity) {
+    AVALONVulnerabilityEntity memberEntity = null;
+    List<Resource<AVALONVulnerabilityEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONVulnerabilityController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONVulnerabilityEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getAlertedAttackWeight()) != null) {
+          list = (List<Resource<AVALONVulnerabilityEntity>>) method
+              .invoke(
+                  AVALONVulnerabilityController.getInstance(),
+                  (String) field
+                      .get(entity.getAlertedAttackWeight()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONVulnerabilityController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONVulnerabilityEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getAlertedAttackWeight()) != null) {
+            list = (List<Resource<AVALONVulnerabilityEntity>>)
+                method.invoke(AVALONVulnerabilityController
+                    .getInstance(),(String) field.get(
+                        entity.getAlertedAttackWeight()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONVulnerabilityEntity)
+          ((Resource) AVALONVulnerabilityController.getInstance().save(
+              entity.getAlertedAttackWeight()).get(0)).getContent();
+    }
+    entity.setAlertedAttackWeight(memberEntity);
+    list = null;
     }
 
   private void setGenderIdFromRepository(
@@ -299,17 +726,265 @@ public class AVALONIoNpcDataController {
     list = null;
     }
 
+  private void setMoveStrengthIdFromRepository(
+      final AVALONIoNpcDataEntity entity) {
+    AVALONVulnerabilityEntity memberEntity = null;
+    List<Resource<AVALONVulnerabilityEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONVulnerabilityController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONVulnerabilityEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getMoveStrength()) != null) {
+          list = (List<Resource<AVALONVulnerabilityEntity>>) method
+              .invoke(
+                  AVALONVulnerabilityController.getInstance(),
+                  (String) field
+                      .get(entity.getMoveStrength()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONVulnerabilityController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONVulnerabilityEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getMoveStrength()) != null) {
+            list = (List<Resource<AVALONVulnerabilityEntity>>)
+                method.invoke(AVALONVulnerabilityController
+                    .getInstance(),(String) field.get(
+                        entity.getMoveStrength()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONVulnerabilityEntity)
+          ((Resource) AVALONVulnerabilityController.getInstance().save(
+              entity.getMoveStrength()).get(0)).getContent();
+    }
+    entity.setMoveStrength(memberEntity);
+    list = null;
+    }
+
+  private void setUnalertedAttackWeightIdFromRepository(
+      final AVALONIoNpcDataEntity entity) {
+    AVALONVulnerabilityEntity memberEntity = null;
+    List<Resource<AVALONVulnerabilityEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONVulnerabilityController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONVulnerabilityEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getUnalertedAttackWeight()) != null) {
+          list = (List<Resource<AVALONVulnerabilityEntity>>) method
+              .invoke(
+                  AVALONVulnerabilityController.getInstance(),
+                  (String) field
+                      .get(entity.getUnalertedAttackWeight()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONVulnerabilityController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONVulnerabilityEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getUnalertedAttackWeight()) != null) {
+            list = (List<Resource<AVALONVulnerabilityEntity>>)
+                method.invoke(AVALONVulnerabilityController
+                    .getInstance(),(String) field.get(
+                        entity.getUnalertedAttackWeight()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONVulnerabilityEntity)
+          ((Resource) AVALONVulnerabilityController.getInstance().save(
+              entity.getUnalertedAttackWeight()).get(0)).getContent();
+    }
+    entity.setUnalertedAttackWeight(memberEntity);
+    list = null;
+    }
+
+  private void setVulnerabilityIdFromRepository(
+      final AVALONIoNpcDataEntity entity) {
+    AVALONVulnerabilityEntity memberEntity = null;
+    List<Resource<AVALONVulnerabilityEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONVulnerabilityController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONVulnerabilityEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getVulnerability()) != null) {
+          list = (List<Resource<AVALONVulnerabilityEntity>>) method
+              .invoke(
+                  AVALONVulnerabilityController.getInstance(),
+                  (String) field
+                      .get(entity.getVulnerability()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONVulnerabilityController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONVulnerabilityEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getVulnerability()) != null) {
+            list = (List<Resource<AVALONVulnerabilityEntity>>)
+                method.invoke(AVALONVulnerabilityController
+                    .getInstance(),(String) field.get(
+                        entity.getVulnerability()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONVulnerabilityEntity)
+          ((Resource) AVALONVulnerabilityController.getInstance().save(
+              entity.getVulnerability()).get(0)).getContent();
+    }
+    entity.setVulnerability(memberEntity);
+    list = null;
+    }
+
+  private void setWeightIdFromRepository(
+      final AVALONIoNpcDataEntity entity) {
+    AVALONVulnerabilityEntity memberEntity = null;
+    List<Resource<AVALONVulnerabilityEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONVulnerabilityController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONVulnerabilityEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getWeight()) != null) {
+          list = (List<Resource<AVALONVulnerabilityEntity>>) method
+              .invoke(
+                  AVALONVulnerabilityController.getInstance(),
+                  (String) field
+                      .get(entity.getWeight()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONVulnerabilityController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONVulnerabilityEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getWeight()) != null) {
+            list = (List<Resource<AVALONVulnerabilityEntity>>)
+                method.invoke(AVALONVulnerabilityController
+                    .getInstance(),(String) field.get(
+                        entity.getWeight()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONVulnerabilityEntity)
+          ((Resource) AVALONVulnerabilityController.getInstance().save(
+              entity.getWeight()).get(0)).getContent();
+    }
+    entity.setWeight(memberEntity);
+    list = null;
+    }
+
 
     /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a behavior.
-     * @param behavior the io_npc_data' behavior
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a alertedAttackSpeed.
+     * @param alertedAttackSpeed the io_npc_data' alertedAttackSpeed
      * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
      */
-    @RequestMapping(path = "behavior/{behavior}",
+    @RequestMapping(path = "alerted_attack_speed/{alertedAttackSpeed}",
             method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByBehavior(
-            @PathVariable final Long behavior) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByBehavior(behavior)
+    public List<Resource<AVALONIoNpcDataEntity>> getByAlertedAttackSpeed(
+            @PathVariable final Long alertedAttackSpeed) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByAlertedAttackSpeed(alertedAttackSpeed)
                 .iterator();
         List<Resource<AVALONIoNpcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoNpcDataEntity>>();
@@ -320,15 +995,15 @@ public class AVALONIoNpcDataController {
         return resources;
     }
     /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a behaviorParam.
-     * @param behaviorParam the io_npc_data' behaviorParam
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a alertedAttackStars.
+     * @param alertedAttackStars the io_npc_data' alertedAttackStars
      * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
      */
-    @RequestMapping(path = "behavior_param/{behaviorParam}",
+    @RequestMapping(path = "alerted_attack_stars/{alertedAttackStars}",
             method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByBehaviorParam(
-            @PathVariable final Float behaviorParam) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByBehaviorParam(behaviorParam)
+    public List<Resource<AVALONIoNpcDataEntity>> getByAlertedAttackStars(
+            @PathVariable final Long alertedAttackStars) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByAlertedAttackStars(alertedAttackStars)
                 .iterator();
         List<Resource<AVALONIoNpcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoNpcDataEntity>>();
@@ -339,15 +1014,15 @@ public class AVALONIoNpcDataController {
         return resources;
     }
     /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a climbCount.
-     * @param climbCount the io_npc_data' climbCount
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a alertedMove.
+     * @param alertedMove the io_npc_data' alertedMove
      * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
      */
-    @RequestMapping(path = "climb_count/{climbCount}",
+    @RequestMapping(path = "alerted_move/{alertedMove}",
             method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByClimbCount(
-            @PathVariable final Float climbCount) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByClimbCount(climbCount)
+    public List<Resource<AVALONIoNpcDataEntity>> getByAlertedMove(
+            @PathVariable final Long alertedMove) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByAlertedMove(alertedMove)
                 .iterator();
         List<Resource<AVALONIoNpcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoNpcDataEntity>>();
@@ -358,110 +1033,15 @@ public class AVALONIoNpcDataController {
         return resources;
     }
     /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a collidState.
-     * @param collidState the io_npc_data' collidState
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a goldBounty.
+     * @param goldBounty the io_npc_data' goldBounty
      * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
      */
-    @RequestMapping(path = "collid_state/{collidState}",
+    @RequestMapping(path = "gold_bounty/{goldBounty}",
             method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByCollidState(
-            @PathVariable final Long collidState) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByCollidState(collidState)
-                .iterator();
-        List<Resource<AVALONIoNpcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoNpcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a collidTime.
-     * @param collidTime the io_npc_data' collidTime
-     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
-     */
-    @RequestMapping(path = "collid_time/{collidTime}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByCollidTime(
-            @PathVariable final Long collidTime) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByCollidTime(collidTime)
-                .iterator();
-        List<Resource<AVALONIoNpcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoNpcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a critical.
-     * @param critical the io_npc_data' critical
-     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
-     */
-    @RequestMapping(path = "critical/{critical}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByCritical(
-            @PathVariable final Float critical) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByCritical(critical)
-                .iterator();
-        List<Resource<AVALONIoNpcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoNpcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a cut.
-     * @param cut the io_npc_data' cut
-     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
-     */
-    @RequestMapping(path = "cut/{cut}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByCut(
-            @PathVariable final Boolean cut) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByCut(cut)
-                .iterator();
-        List<Resource<AVALONIoNpcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoNpcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a cuts.
-     * @param cuts the io_npc_data' cuts
-     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
-     */
-    @RequestMapping(path = "cuts/{cuts}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByCuts(
-            @PathVariable final Long cuts) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByCuts(cuts)
-                .iterator();
-        List<Resource<AVALONIoNpcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoNpcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a damages.
-     * @param damages the io_npc_data' damages
-     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
-     */
-    @RequestMapping(path = "damages/{damages}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByDamages(
-            @PathVariable final Float damages) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByDamages(damages)
+    public List<Resource<AVALONIoNpcDataEntity>> getByGoldBounty(
+            @PathVariable final Long goldBounty) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByGoldBounty(goldBounty)
                 .iterator();
         List<Resource<AVALONIoNpcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoNpcDataEntity>>();
@@ -491,82 +1071,6 @@ public class AVALONIoNpcDataController {
         return resources;
     }
     /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a life.
-     * @param life the io_npc_data' life
-     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
-     */
-    @RequestMapping(path = "life/{life}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByLife(
-            @PathVariable final Float life) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByLife(life)
-                .iterator();
-        List<Resource<AVALONIoNpcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoNpcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a mana.
-     * @param mana the io_npc_data' mana
-     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
-     */
-    @RequestMapping(path = "mana/{mana}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByMana(
-            @PathVariable final Float mana) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByMana(mana)
-                .iterator();
-        List<Resource<AVALONIoNpcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoNpcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a maxlife.
-     * @param maxlife the io_npc_data' maxlife
-     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
-     */
-    @RequestMapping(path = "maxlife/{maxlife}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByMaxlife(
-            @PathVariable final Float maxlife) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByMaxlife(maxlife)
-                .iterator();
-        List<Resource<AVALONIoNpcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoNpcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a maxmana.
-     * @param maxmana the io_npc_data' maxmana
-     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
-     */
-    @RequestMapping(path = "maxmana/{maxmana}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByMaxmana(
-            @PathVariable final Float maxmana) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByMaxmana(maxmana)
-                .iterator();
-        List<Resource<AVALONIoNpcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoNpcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
      * Gets a list of {@link AVALONIoNpcDataEntity}s that share a name.
      * @param name the io_npc_data' name
      * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
@@ -576,6 +1080,25 @@ public class AVALONIoNpcDataController {
     public List<Resource<AVALONIoNpcDataEntity>> getByName(
             @PathVariable final String name) {
         Iterator<AVALONIoNpcDataEntity> iter = repository.findByName(name)
+                .iterator();
+        List<Resource<AVALONIoNpcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoNpcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a notoriety.
+     * @param notoriety the io_npc_data' notoriety
+     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
+     */
+    @RequestMapping(path = "notoriety/{notoriety}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoNpcDataEntity>> getByNotoriety(
+            @PathVariable final Long notoriety) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByNotoriety(notoriety)
                 .iterator();
         List<Resource<AVALONIoNpcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoNpcDataEntity>>();
@@ -624,15 +1147,15 @@ public class AVALONIoNpcDataController {
         return resources;
     }
     /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a weapon.
-     * @param weapon the io_npc_data' weapon
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a unalertedAttackSpeed.
+     * @param unalertedAttackSpeed the io_npc_data' unalertedAttackSpeed
      * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
      */
-    @RequestMapping(path = "weapon/{weapon}",
+    @RequestMapping(path = "unalerted_attack_speed/{unalertedAttackSpeed}",
             method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByWeapon(
-            @PathVariable final String weapon) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByWeapon(weapon)
+    public List<Resource<AVALONIoNpcDataEntity>> getByUnalertedAttackSpeed(
+            @PathVariable final Long unalertedAttackSpeed) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByUnalertedAttackSpeed(unalertedAttackSpeed)
                 .iterator();
         List<Resource<AVALONIoNpcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoNpcDataEntity>>();
@@ -643,15 +1166,53 @@ public class AVALONIoNpcDataController {
         return resources;
     }
     /**
-     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a xpvalue.
-     * @param xpvalue the io_npc_data' xpvalue
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a unalertedAttackStars.
+     * @param unalertedAttackStars the io_npc_data' unalertedAttackStars
      * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
      */
-    @RequestMapping(path = "xpvalue/{xpvalue}",
+    @RequestMapping(path = "unalerted_attack_stars/{unalertedAttackStars}",
             method = RequestMethod.GET)
-    public List<Resource<AVALONIoNpcDataEntity>> getByXpvalue(
-            @PathVariable final Long xpvalue) {
-        Iterator<AVALONIoNpcDataEntity> iter = repository.findByXpvalue(xpvalue)
+    public List<Resource<AVALONIoNpcDataEntity>> getByUnalertedAttackStars(
+            @PathVariable final Long unalertedAttackStars) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByUnalertedAttackStars(unalertedAttackStars)
+                .iterator();
+        List<Resource<AVALONIoNpcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoNpcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a unalertedMove.
+     * @param unalertedMove the io_npc_data' unalertedMove
+     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
+     */
+    @RequestMapping(path = "unalerted_move/{unalertedMove}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoNpcDataEntity>> getByUnalertedMove(
+            @PathVariable final Long unalertedMove) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByUnalertedMove(unalertedMove)
+                .iterator();
+        List<Resource<AVALONIoNpcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoNpcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a wage.
+     * @param wage the io_npc_data' wage
+     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
+     */
+    @RequestMapping(path = "wage/{wage}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoNpcDataEntity>> getByWage(
+            @PathVariable final Long wage) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByWage(wage)
                 .iterator();
         List<Resource<AVALONIoNpcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoNpcDataEntity>>();

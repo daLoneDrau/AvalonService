@@ -16,59 +16,29 @@ import com.osrapi.models.avalon.AVALONIoNpcDataEntity;
 public interface AVALONIoNpcDataRepository
 extends CrudRepository<AVALONIoNpcDataEntity, Long> {
 	/**
-	 * Retrieves a list of io npc datas by their behavior.
-	 * @param behavior the behavior
+	 * Retrieves a list of io npc datas by their alertedAttackSpeed.
+	 * @param alertedAttackSpeed the alertedAttackSpeed
 	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
 	 */
-	List<AVALONIoNpcDataEntity> findByBehavior(Long behavior);
+	List<AVALONIoNpcDataEntity> findByAlertedAttackSpeed(Long alertedAttackSpeed);
 	/**
-	 * Retrieves a list of io npc datas by their behaviorParam.
-	 * @param behaviorParam the behaviorParam
+	 * Retrieves a list of io npc datas by their alertedAttackStars.
+	 * @param alertedAttackStars the alertedAttackStars
 	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
 	 */
-	List<AVALONIoNpcDataEntity> findByBehaviorParam(Float behaviorParam);
+	List<AVALONIoNpcDataEntity> findByAlertedAttackStars(Long alertedAttackStars);
 	/**
-	 * Retrieves a list of io npc datas by their climbCount.
-	 * @param climbCount the climbCount
+	 * Retrieves a list of io npc datas by their alertedMove.
+	 * @param alertedMove the alertedMove
 	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
 	 */
-	List<AVALONIoNpcDataEntity> findByClimbCount(Float climbCount);
+	List<AVALONIoNpcDataEntity> findByAlertedMove(Long alertedMove);
 	/**
-	 * Retrieves a list of io npc datas by their collidState.
-	 * @param collidState the collidState
+	 * Retrieves a list of io npc datas by their goldBounty.
+	 * @param goldBounty the goldBounty
 	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
 	 */
-	List<AVALONIoNpcDataEntity> findByCollidState(Long collidState);
-	/**
-	 * Retrieves a list of io npc datas by their collidTime.
-	 * @param collidTime the collidTime
-	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
-	 */
-	List<AVALONIoNpcDataEntity> findByCollidTime(Long collidTime);
-	/**
-	 * Retrieves a list of io npc datas by their critical.
-	 * @param critical the critical
-	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
-	 */
-	List<AVALONIoNpcDataEntity> findByCritical(Float critical);
-	/**
-	 * Retrieves a list of io npc datas by their cut.
-	 * @param cut the cut
-	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
-	 */
-	List<AVALONIoNpcDataEntity> findByCut(Boolean cut);
-	/**
-	 * Retrieves a list of io npc datas by their cuts.
-	 * @param cuts the cuts
-	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
-	 */
-	List<AVALONIoNpcDataEntity> findByCuts(Long cuts);
-	/**
-	 * Retrieves a list of io npc datas by their damages.
-	 * @param damages the damages
-	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
-	 */
-	List<AVALONIoNpcDataEntity> findByDamages(Float damages);
+	List<AVALONIoNpcDataEntity> findByGoldBounty(Long goldBounty);
 	/**
 	 * Retrieves a list of io npc datas by their internalScript.
 	 * @param internalScript the internalScript
@@ -76,35 +46,17 @@ extends CrudRepository<AVALONIoNpcDataEntity, Long> {
 	 */
 	List<AVALONIoNpcDataEntity> findByInternalScript(String internalScript);
 	/**
-	 * Retrieves a list of io npc datas by their life.
-	 * @param life the life
-	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
-	 */
-	List<AVALONIoNpcDataEntity> findByLife(Float life);
-	/**
-	 * Retrieves a list of io npc datas by their mana.
-	 * @param mana the mana
-	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
-	 */
-	List<AVALONIoNpcDataEntity> findByMana(Float mana);
-	/**
-	 * Retrieves a list of io npc datas by their maxlife.
-	 * @param maxlife the maxlife
-	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
-	 */
-	List<AVALONIoNpcDataEntity> findByMaxlife(Float maxlife);
-	/**
-	 * Retrieves a list of io npc datas by their maxmana.
-	 * @param maxmana the maxmana
-	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
-	 */
-	List<AVALONIoNpcDataEntity> findByMaxmana(Float maxmana);
-	/**
 	 * Retrieves a list of io npc datas by their name.
 	 * @param name the name
 	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
 	 */
 	List<AVALONIoNpcDataEntity> findByName(String name);
+	/**
+	 * Retrieves a list of io npc datas by their notoriety.
+	 * @param notoriety the notoriety
+	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
+	 */
+	List<AVALONIoNpcDataEntity> findByNotoriety(Long notoriety);
 	/**
 	 * Retrieves a list of io npc datas by their npcFlags.
 	 * @param npcFlags the npcFlags
@@ -118,15 +70,27 @@ extends CrudRepository<AVALONIoNpcDataEntity, Long> {
 	 */
 	List<AVALONIoNpcDataEntity> findByTitle(String title);
 	/**
-	 * Retrieves a list of io npc datas by their weapon.
-	 * @param weapon the weapon
+	 * Retrieves a list of io npc datas by their unalertedAttackSpeed.
+	 * @param unalertedAttackSpeed the unalertedAttackSpeed
 	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
 	 */
-	List<AVALONIoNpcDataEntity> findByWeapon(String weapon);
+	List<AVALONIoNpcDataEntity> findByUnalertedAttackSpeed(Long unalertedAttackSpeed);
 	/**
-	 * Retrieves a list of io npc datas by their xpvalue.
-	 * @param xpvalue the xpvalue
+	 * Retrieves a list of io npc datas by their unalertedAttackStars.
+	 * @param unalertedAttackStars the unalertedAttackStars
 	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
 	 */
-	List<AVALONIoNpcDataEntity> findByXpvalue(Long xpvalue);
+	List<AVALONIoNpcDataEntity> findByUnalertedAttackStars(Long unalertedAttackStars);
+	/**
+	 * Retrieves a list of io npc datas by their unalertedMove.
+	 * @param unalertedMove the unalertedMove
+	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
+	 */
+	List<AVALONIoNpcDataEntity> findByUnalertedMove(Long unalertedMove);
+	/**
+	 * Retrieves a list of io npc datas by their wage.
+	 * @param wage the wage
+	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
+	 */
+	List<AVALONIoNpcDataEntity> findByWage(Long wage);
 }

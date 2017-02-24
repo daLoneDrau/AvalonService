@@ -73,44 +73,150 @@ public final class AVALONIoNpcDataEntity {
         id = val;
     }
 
-    /** the xpvalue. */
-    @Column(name = "xpvalue")
-    @JsonProperty("xpvalue")
-    
-    private Long                    xpvalue;
+    /** the weight. */
+    @ManyToOne(targetEntity = AVALONVulnerabilityEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "weight")
+    @JsonProperty("weight")
+  @NotNull
+    private AVALONVulnerabilityEntity    weight;
     /**
-     * Gets the xpvalue.
-     * @return {@link Long}
+     * Gets the weight.
+     * @return {@link AVALONVulnerabilityEntity}
      */
-    public Long getXpvalue() {
-        return xpvalue;
+    public AVALONVulnerabilityEntity getWeight() {
+        return weight;
     }
     /**
-     * Sets the xpvalue.
+     * Sets the weight.
      * @param val the new value
      */
-    public void setXpvalue(final Long val) {
-        xpvalue = val;
+    public void setWeight(final AVALONVulnerabilityEntity val) {
+        weight = val;
     }
 
-    /** the weapon. */
-    @Column(name = "weapon")
-    @JsonProperty("weapon")
-    @NotNull
-    private String                    weapon;
+    /** the wage. */
+    @Column(name = "wage")
+    @JsonProperty("wage")
+    
+    private Long                    wage;
     /**
-     * Gets the weapon.
-     * @return {@link String}
+     * Gets the wage.
+     * @return {@link Long}
      */
-    public String getWeapon() {
-        return weapon;
+    public Long getWage() {
+        return wage;
     }
     /**
-     * Sets the weapon.
+     * Sets the wage.
      * @param val the new value
      */
-    public void setWeapon(final String val) {
-        weapon = val;
+    public void setWage(final Long val) {
+        wage = val;
+    }
+
+    /** the vulnerability. */
+    @ManyToOne(targetEntity = AVALONVulnerabilityEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "vulnerability")
+    @JsonProperty("vulnerability")
+  @NotNull
+    private AVALONVulnerabilityEntity    vulnerability;
+    /**
+     * Gets the vulnerability.
+     * @return {@link AVALONVulnerabilityEntity}
+     */
+    public AVALONVulnerabilityEntity getVulnerability() {
+        return vulnerability;
+    }
+    /**
+     * Sets the vulnerability.
+     * @param val the new value
+     */
+    public void setVulnerability(final AVALONVulnerabilityEntity val) {
+        vulnerability = val;
+    }
+
+    /** the unalertedMove. */
+    @Column(name = "unalerted_move")
+    @JsonProperty("unalerted_move")
+    @NotNull
+    private long                    unalertedMove;
+    /**
+     * Gets the unalertedMove.
+     * @return {@link long}
+     */
+    public long getUnalertedMove() {
+        return unalertedMove;
+    }
+    /**
+     * Sets the unalertedMove.
+     * @param val the new value
+     */
+    public void setUnalertedMove(final long val) {
+        unalertedMove = val;
+    }
+
+    /** the unalertedAttackWeight. */
+    @ManyToOne(targetEntity = AVALONVulnerabilityEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "unalertedAttackWeight")
+    @JsonProperty("unalerted_attack_weight")
+  @NotNull
+    private AVALONVulnerabilityEntity    unalertedAttackWeight;
+    /**
+     * Gets the unalertedAttackWeight.
+     * @return {@link AVALONVulnerabilityEntity}
+     */
+    public AVALONVulnerabilityEntity getUnalertedAttackWeight() {
+        return unalertedAttackWeight;
+    }
+    /**
+     * Sets the unalertedAttackWeight.
+     * @param val the new value
+     */
+    public void setUnalertedAttackWeight(final AVALONVulnerabilityEntity val) {
+        unalertedAttackWeight = val;
+    }
+
+    /** the unalertedAttackStars. */
+    @Column(name = "unalerted_attack_stars")
+    @JsonProperty("unalerted_attack_stars")
+    
+    private Long                    unalertedAttackStars;
+    /**
+     * Gets the unalertedAttackStars.
+     * @return {@link Long}
+     */
+    public Long getUnalertedAttackStars() {
+        return unalertedAttackStars;
+    }
+    /**
+     * Sets the unalertedAttackStars.
+     * @param val the new value
+     */
+    public void setUnalertedAttackStars(final Long val) {
+        unalertedAttackStars = val;
+    }
+
+    /** the unalertedAttackSpeed. */
+    @Column(name = "unalerted_attack_speed")
+    @JsonProperty("unalerted_attack_speed")
+    @NotNull
+    private long                    unalertedAttackSpeed;
+    /**
+     * Gets the unalertedAttackSpeed.
+     * @return {@link long}
+     */
+    public long getUnalertedAttackSpeed() {
+        return unalertedAttackSpeed;
+    }
+    /**
+     * Sets the unalertedAttackSpeed.
+     * @param val the new value
+     */
+    public void setUnalertedAttackSpeed(final long val) {
+        unalertedAttackSpeed = val;
     }
 
     /** the title. */
@@ -153,6 +259,26 @@ public final class AVALONIoNpcDataEntity {
         npcFlags = val;
     }
 
+    /** the notoriety. */
+    @Column(name = "notoriety")
+    @JsonProperty("notoriety")
+    @NotNull
+    private long                    notoriety;
+    /**
+     * Gets the notoriety.
+     * @return {@link long}
+     */
+    public long getNotoriety() {
+        return notoriety;
+    }
+    /**
+     * Sets the notoriety.
+     * @param val the new value
+     */
+    public void setNotoriety(final long val) {
+        notoriety = val;
+    }
+
     /** the name. */
     @Column(name = "name")
     @JsonProperty("name")
@@ -173,84 +299,26 @@ public final class AVALONIoNpcDataEntity {
         name = val;
     }
 
-    /** the maxmana. */
-    @Column(name = "maxmana")
-    @JsonProperty("maxmana")
-    
-    private Float                    maxmana;
+    /** the moveStrength. */
+    @ManyToOne(targetEntity = AVALONVulnerabilityEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "moveStrength")
+    @JsonProperty("move_strength")
+  @NotNull
+    private AVALONVulnerabilityEntity    moveStrength;
     /**
-     * Gets the maxmana.
-     * @return {@link Float}
+     * Gets the moveStrength.
+     * @return {@link AVALONVulnerabilityEntity}
      */
-    public Float getMaxmana() {
-        return maxmana;
+    public AVALONVulnerabilityEntity getMoveStrength() {
+        return moveStrength;
     }
     /**
-     * Sets the maxmana.
+     * Sets the moveStrength.
      * @param val the new value
      */
-    public void setMaxmana(final Float val) {
-        maxmana = val;
-    }
-
-    /** the maxlife. */
-    @Column(name = "maxlife")
-    @JsonProperty("maxlife")
-    
-    private Float                    maxlife;
-    /**
-     * Gets the maxlife.
-     * @return {@link Float}
-     */
-    public Float getMaxlife() {
-        return maxlife;
-    }
-    /**
-     * Sets the maxlife.
-     * @param val the new value
-     */
-    public void setMaxlife(final Float val) {
-        maxlife = val;
-    }
-
-    /** the mana. */
-    @Column(name = "mana")
-    @JsonProperty("mana")
-    
-    private Float                    mana;
-    /**
-     * Gets the mana.
-     * @return {@link Float}
-     */
-    public Float getMana() {
-        return mana;
-    }
-    /**
-     * Sets the mana.
-     * @param val the new value
-     */
-    public void setMana(final Float val) {
-        mana = val;
-    }
-
-    /** the life. */
-    @Column(name = "life")
-    @JsonProperty("life")
-    
-    private Float                    life;
-    /**
-     * Gets the life.
-     * @return {@link Float}
-     */
-    public Float getLife() {
-        return life;
-    }
-    /**
-     * Sets the life.
-     * @param val the new value
-     */
-    public void setLife(final Float val) {
-        life = val;
+    public void setMoveStrength(final AVALONVulnerabilityEntity val) {
+        moveStrength = val;
     }
 
     /** the internalScript. */
@@ -271,6 +339,26 @@ public final class AVALONIoNpcDataEntity {
      */
     public void setInternalScript(final String val) {
         internalScript = val;
+    }
+
+    /** the goldBounty. */
+    @Column(name = "gold_bounty")
+    @JsonProperty("gold_bounty")
+    
+    private Long                    goldBounty;
+    /**
+     * Gets the goldBounty.
+     * @return {@link Long}
+     */
+    public Long getGoldBounty() {
+        return goldBounty;
+    }
+    /**
+     * Sets the goldBounty.
+     * @param val the new value
+     */
+    public void setGoldBounty(final Long val) {
+        goldBounty = val;
     }
 
     /** the gender. */
@@ -295,184 +383,166 @@ public final class AVALONIoNpcDataEntity {
         gender = val;
     }
 
-    /** the damages. */
-    @Column(name = "damages")
-    @JsonProperty("damages")
-    
-    private Float                    damages;
+    /** the alertedMove. */
+    @Column(name = "alerted_move")
+    @JsonProperty("alerted_move")
+    @NotNull
+    private long                    alertedMove;
     /**
-     * Gets the damages.
-     * @return {@link Float}
+     * Gets the alertedMove.
+     * @return {@link long}
      */
-    public Float getDamages() {
-        return damages;
+    public long getAlertedMove() {
+        return alertedMove;
     }
     /**
-     * Sets the damages.
+     * Sets the alertedMove.
      * @param val the new value
      */
-    public void setDamages(final Float val) {
-        damages = val;
+    public void setAlertedMove(final long val) {
+        alertedMove = val;
     }
 
-    /** the cuts. */
-    @Column(name = "cuts")
-    @JsonProperty("cuts")
-    
-    private Long                    cuts;
+    /** the alertedAttackWeight. */
+    @ManyToOne(targetEntity = AVALONVulnerabilityEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "alertedAttackWeight")
+    @JsonProperty("alerted_attack_weight")
+  @NotNull
+    private AVALONVulnerabilityEntity    alertedAttackWeight;
     /**
-     * Gets the cuts.
+     * Gets the alertedAttackWeight.
+     * @return {@link AVALONVulnerabilityEntity}
+     */
+    public AVALONVulnerabilityEntity getAlertedAttackWeight() {
+        return alertedAttackWeight;
+    }
+    /**
+     * Sets the alertedAttackWeight.
+     * @param val the new value
+     */
+    public void setAlertedAttackWeight(final AVALONVulnerabilityEntity val) {
+        alertedAttackWeight = val;
+    }
+
+    /** the alertedAttackStars. */
+    @Column(name = "alerted_attack_stars")
+    @JsonProperty("alerted_attack_stars")
+    
+    private Long                    alertedAttackStars;
+    /**
+     * Gets the alertedAttackStars.
      * @return {@link Long}
      */
-    public Long getCuts() {
-        return cuts;
+    public Long getAlertedAttackStars() {
+        return alertedAttackStars;
     }
     /**
-     * Sets the cuts.
+     * Sets the alertedAttackStars.
      * @param val the new value
      */
-    public void setCuts(final Long val) {
-        cuts = val;
+    public void setAlertedAttackStars(final Long val) {
+        alertedAttackStars = val;
     }
 
-    /** the cut. */
-    @Column(name = "cut")
-    @JsonProperty("cut")
-    
-    private Boolean                    cut;
+    /** the alertedAttackSpeed. */
+    @Column(name = "alerted_attack_speed")
+    @JsonProperty("alerted_attack_speed")
+    @NotNull
+    private long                    alertedAttackSpeed;
     /**
-     * Gets the cut.
-     * @return {@link Boolean}
+     * Gets the alertedAttackSpeed.
+     * @return {@link long}
      */
-    public Boolean getCut() {
-        return cut;
+    public long getAlertedAttackSpeed() {
+        return alertedAttackSpeed;
     }
     /**
-     * Sets the cut.
+     * Sets the alertedAttackSpeed.
      * @param val the new value
      */
-    public void setCut(final Boolean val) {
-        cut = val;
+    public void setAlertedAttackSpeed(final long val) {
+        alertedAttackSpeed = val;
     }
 
-    /** the critical. */
-    @Column(name = "critical")
-    @JsonProperty("critical")
-    
-    private Float                    critical;
     /**
-     * Gets the critical.
-     * @return {@link Float}
+     * the list of {@link AVALONIoItemDataEntity}s associated with this
+     * {@link AVALONIoNpcDataEntity}.
      */
-    public Float getCritical() {
-        return critical;
+    @OneToMany(targetEntity = AVALONIoItemDataEntity.class,
+      fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinTable(name = "io_npc_data_inventory_items_lookup", schema = "avalon",
+  joinColumns = @JoinColumn(name = "io_npc_data_id",
+  referencedColumnName = "io_npc_data_id"),
+  inverseJoinColumns = @JoinColumn(name = "io_item_data_id",
+  referencedColumnName = "io_item_data_id"))
+    @JsonProperty("inventory_items")
+    private List<AVALONIoItemDataEntity>    inventoryItems;
+    /**
+     * Gets the list of inventoryItemss.
+     * @return {@link List}<{@link AVALONIoItemDataEntity}>
+     */
+    public List<AVALONIoItemDataEntity> getInventoryItems() {
+        return inventoryItems;
     }
     /**
-     * Sets the critical.
+     * Sets the list of inventoryItemss.
      * @param val the new value
      */
-    public void setCritical(final Float val) {
-        critical = val;
+    public void setInventoryItems(final List<AVALONIoItemDataEntity> val) {
+        inventoryItems = val;
     }
 
-    /** the collidTime. */
-    @Column(name = "collid_time")
-    @JsonProperty("collid_time")
-    
-    private Long                    collidTime;
     /**
-     * Gets the collidTime.
-     * @return {@link Long}
+     * the list of {@link AVALONGroupEntity}s associated with this
+     * {@link AVALONIoNpcDataEntity}.
      */
-    public Long getCollidTime() {
-        return collidTime;
+    @OneToMany(targetEntity = AVALONGroupEntity.class,
+      fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinTable(name = "io_npc_data_groups_lookup", schema = "avalon",
+  joinColumns = @JoinColumn(name = "io_npc_data_id",
+  referencedColumnName = "io_npc_data_id"),
+  inverseJoinColumns = @JoinColumn(name = "group_id",
+  referencedColumnName = "group_id"))
+    @JsonProperty("groups")
+    private List<AVALONGroupEntity>    groups;
+    /**
+     * Gets the list of groupss.
+     * @return {@link List}<{@link AVALONGroupEntity}>
+     */
+    public List<AVALONGroupEntity> getGroups() {
+        return groups;
     }
     /**
-     * Sets the collidTime.
+     * Sets the list of groupss.
      * @param val the new value
      */
-    public void setCollidTime(final Long val) {
-        collidTime = val;
+    public void setGroups(final List<AVALONGroupEntity> val) {
+        groups = val;
     }
 
-    /** the collidState. */
-    @Column(name = "collid_state")
-    @JsonProperty("collid_state")
-    
-    private Long                    collidState;
+    @ElementCollection
+    @CollectionTable(name = "io_npc_data_equipped_items_lookup",
+  schema = "avalon", joinColumns = @JoinColumn(name = "io_npc_data_id"))
+    @MapKeyColumn(name = "key")
+    @Column(name = "value")
+    @JsonProperty("equipped_items")
+    private Map<String, String> equippedItems;
     /**
-     * Gets the collidState.
-     * @return {@link Long}
+     * Gets the map of equippedItemss.
+     * @return {@link Map}<{@link String}, {@link String}>
      */
-    public Long getCollidState() {
-        return collidState;
+    public Map<String, String> getEquippedItems() {
+        return equippedItems;
     }
     /**
-     * Sets the collidState.
+     * Sets the mapping for equippedItemss.
      * @param val the new value
      */
-    public void setCollidState(final Long val) {
-        collidState = val;
-    }
-
-    /** the climbCount. */
-    @Column(name = "climb_count")
-    @JsonProperty("climb_count")
-    
-    private Float                    climbCount;
-    /**
-     * Gets the climbCount.
-     * @return {@link Float}
-     */
-    public Float getClimbCount() {
-        return climbCount;
-    }
-    /**
-     * Sets the climbCount.
-     * @param val the new value
-     */
-    public void setClimbCount(final Float val) {
-        climbCount = val;
-    }
-
-    /** the behaviorParam. */
-    @Column(name = "behavior_param")
-    @JsonProperty("behavior_param")
-    
-    private Float                    behaviorParam;
-    /**
-     * Gets the behaviorParam.
-     * @return {@link Float}
-     */
-    public Float getBehaviorParam() {
-        return behaviorParam;
-    }
-    /**
-     * Sets the behaviorParam.
-     * @param val the new value
-     */
-    public void setBehaviorParam(final Float val) {
-        behaviorParam = val;
-    }
-
-    /** the behavior. */
-    @Column(name = "behavior")
-    @JsonProperty("behavior")
-    
-    private Long                    behavior;
-    /**
-     * Gets the behavior.
-     * @return {@link Long}
-     */
-    public Long getBehavior() {
-        return behavior;
-    }
-    /**
-     * Sets the behavior.
-     * @param val the new value
-     */
-    public void setBehavior(final Long val) {
-        behavior = val;
+    public void setEquippedItems(Map<String, String> val) {
+        equippedItems = val;
     }
 
 }
