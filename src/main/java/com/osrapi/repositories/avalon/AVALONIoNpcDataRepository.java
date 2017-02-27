@@ -34,6 +34,12 @@ extends CrudRepository<AVALONIoNpcDataEntity, Long> {
 	 */
 	List<AVALONIoNpcDataEntity> findByAlertedMove(Long alertedMove);
 	/**
+	 * Retrieves a list of io npc datas by their fameBounty.
+	 * @param fameBounty the fameBounty
+	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
+	 */
+	List<AVALONIoNpcDataEntity> findByFameBounty(Long fameBounty);
+	/**
 	 * Retrieves a list of io npc datas by their goldBounty.
 	 * @param goldBounty the goldBounty
 	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
@@ -51,6 +57,12 @@ extends CrudRepository<AVALONIoNpcDataEntity, Long> {
 	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
 	 */
 	List<AVALONIoNpcDataEntity> findByName(String name);
+	/**
+	 * Retrieves a list of io npc datas by their naturalWeaponLength.
+	 * @param naturalWeaponLength the naturalWeaponLength
+	 * @return {@link List}<{@link AVALONIoNpcDataEntity}>
+	 */
+	List<AVALONIoNpcDataEntity> findByNaturalWeaponLength(Long naturalWeaponLength);
 	/**
 	 * Retrieves a list of io npc datas by their notoriety.
 	 * @param notoriety the notoriety

@@ -21,6 +21,7 @@ import com.osrapi.models.avalon.AVALONIoNpcDataEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
 import com.osrapi.models.avalon.AVALONGenderEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
+import com.osrapi.models.avalon.AVALONAttackTypeEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
@@ -297,6 +298,11 @@ public class AVALONIoNpcDataController {
         if (entity.getMoveStrength() != null
         && entity.getMoveStrength().getId() == null) {
       setMoveStrengthIdFromRepository(entity);
+        }
+
+        if (entity.getNaturalWeaponType() != null
+        && entity.getNaturalWeaponType().getId() == null) {
+      setNaturalWeaponTypeIdFromRepository(entity);
         }
 
         if (entity.getUnalertedAttackWeight() != null
@@ -578,6 +584,11 @@ public class AVALONIoNpcDataController {
       setMoveStrengthIdFromRepository(entity);
         }
 
+        if (entity.getNaturalWeaponType() != null
+        && entity.getNaturalWeaponType().getId() == null) {
+      setNaturalWeaponTypeIdFromRepository(entity);
+        }
+
         if (entity.getUnalertedAttackWeight() != null
         && entity.getUnalertedAttackWeight().getId() == null) {
       setUnalertedAttackWeightIdFromRepository(entity);
@@ -785,6 +796,68 @@ public class AVALONIoNpcDataController {
               entity.getMoveStrength()).get(0)).getContent();
     }
     entity.setMoveStrength(memberEntity);
+    list = null;
+    }
+
+  private void setNaturalWeaponTypeIdFromRepository(
+      final AVALONIoNpcDataEntity entity) {
+    AVALONAttackTypeEntity memberEntity = null;
+    List<Resource<AVALONAttackTypeEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONAttackTypeController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONAttackTypeEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getNaturalWeaponType()) != null) {
+          list = (List<Resource<AVALONAttackTypeEntity>>) method
+              .invoke(
+                  AVALONAttackTypeController.getInstance(),
+                  (String) field
+                      .get(entity.getNaturalWeaponType()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONAttackTypeController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONAttackTypeEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getNaturalWeaponType()) != null) {
+            list = (List<Resource<AVALONAttackTypeEntity>>)
+                method.invoke(AVALONAttackTypeController
+                    .getInstance(),(String) field.get(
+                        entity.getNaturalWeaponType()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONAttackTypeEntity)
+          ((Resource) AVALONAttackTypeController.getInstance().save(
+              entity.getNaturalWeaponType()).get(0)).getContent();
+    }
+    entity.setNaturalWeaponType(memberEntity);
     list = null;
     }
 
@@ -1033,6 +1106,25 @@ public class AVALONIoNpcDataController {
         return resources;
     }
     /**
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a fameBounty.
+     * @param fameBounty the io_npc_data' fameBounty
+     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
+     */
+    @RequestMapping(path = "fame_bounty/{fameBounty}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoNpcDataEntity>> getByFameBounty(
+            @PathVariable final Long fameBounty) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByFameBounty(fameBounty)
+                .iterator();
+        List<Resource<AVALONIoNpcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoNpcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
      * Gets a list of {@link AVALONIoNpcDataEntity}s that share a goldBounty.
      * @param goldBounty the io_npc_data' goldBounty
      * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
@@ -1080,6 +1172,25 @@ public class AVALONIoNpcDataController {
     public List<Resource<AVALONIoNpcDataEntity>> getByName(
             @PathVariable final String name) {
         Iterator<AVALONIoNpcDataEntity> iter = repository.findByName(name)
+                .iterator();
+        List<Resource<AVALONIoNpcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoNpcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoNpcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
+     * Gets a list of {@link AVALONIoNpcDataEntity}s that share a naturalWeaponLength.
+     * @param naturalWeaponLength the io_npc_data' naturalWeaponLength
+     * @return {@link List}<{@link Resource}<{@link AVALONIoNpcDataEntity}>>
+     */
+    @RequestMapping(path = "natural_weapon_length/{naturalWeaponLength}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoNpcDataEntity>> getByNaturalWeaponLength(
+            @PathVariable final Long naturalWeaponLength) {
+        Iterator<AVALONIoNpcDataEntity> iter = repository.findByNaturalWeaponLength(naturalWeaponLength)
                 .iterator();
         List<Resource<AVALONIoNpcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoNpcDataEntity>>();

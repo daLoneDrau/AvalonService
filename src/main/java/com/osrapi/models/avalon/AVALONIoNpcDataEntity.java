@@ -78,7 +78,7 @@ public final class AVALONIoNpcDataEntity {
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "weight")
     @JsonProperty("weight")
-  @NotNull
+  
     private AVALONVulnerabilityEntity    weight;
     /**
      * Gets the weight.
@@ -120,7 +120,7 @@ public final class AVALONIoNpcDataEntity {
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "vulnerability")
     @JsonProperty("vulnerability")
-  @NotNull
+  
     private AVALONVulnerabilityEntity    vulnerability;
     /**
      * Gets the vulnerability.
@@ -279,6 +279,48 @@ public final class AVALONIoNpcDataEntity {
         notoriety = val;
     }
 
+    /** the naturalWeaponType. */
+    @ManyToOne(targetEntity = AVALONAttackTypeEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "naturalWeaponType")
+    @JsonProperty("natural_weapon_type")
+  
+    private AVALONAttackTypeEntity    naturalWeaponType;
+    /**
+     * Gets the naturalWeaponType.
+     * @return {@link AVALONAttackTypeEntity}
+     */
+    public AVALONAttackTypeEntity getNaturalWeaponType() {
+        return naturalWeaponType;
+    }
+    /**
+     * Sets the naturalWeaponType.
+     * @param val the new value
+     */
+    public void setNaturalWeaponType(final AVALONAttackTypeEntity val) {
+        naturalWeaponType = val;
+    }
+
+    /** the naturalWeaponLength. */
+    @Column(name = "natural_weapon_length")
+    @JsonProperty("natural_weapon_length")
+    
+    private Long                    naturalWeaponLength;
+    /**
+     * Gets the naturalWeaponLength.
+     * @return {@link Long}
+     */
+    public Long getNaturalWeaponLength() {
+        return naturalWeaponLength;
+    }
+    /**
+     * Sets the naturalWeaponLength.
+     * @param val the new value
+     */
+    public void setNaturalWeaponLength(final Long val) {
+        naturalWeaponLength = val;
+    }
+
     /** the name. */
     @Column(name = "name")
     @JsonProperty("name")
@@ -304,7 +346,7 @@ public final class AVALONIoNpcDataEntity {
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "moveStrength")
     @JsonProperty("move_strength")
-  @NotNull
+  
     private AVALONVulnerabilityEntity    moveStrength;
     /**
      * Gets the moveStrength.
@@ -366,7 +408,7 @@ public final class AVALONIoNpcDataEntity {
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "gender")
     @JsonProperty("gender")
-  @NotNull
+  
     private AVALONGenderEntity    gender;
     /**
      * Gets the gender.
@@ -381,6 +423,26 @@ public final class AVALONIoNpcDataEntity {
      */
     public void setGender(final AVALONGenderEntity val) {
         gender = val;
+    }
+
+    /** the fameBounty. */
+    @Column(name = "fame_bounty")
+    @JsonProperty("fame_bounty")
+    
+    private Long                    fameBounty;
+    /**
+     * Gets the fameBounty.
+     * @return {@link Long}
+     */
+    public Long getFameBounty() {
+        return fameBounty;
+    }
+    /**
+     * Sets the fameBounty.
+     * @param val the new value
+     */
+    public void setFameBounty(final Long val) {
+        fameBounty = val;
     }
 
     /** the alertedMove. */
