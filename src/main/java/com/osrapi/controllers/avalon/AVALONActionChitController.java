@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.osrapi.models.avalon.AVALONActionChitEntity;
+import com.osrapi.models.avalon.AVALONActionTypeEntity;
+import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
+import com.osrapi.models.avalon.AVALONMagicColorEntity;
 
 import com.osrapi.repositories.avalon.AVALONActionChitRepository;
 
@@ -122,7 +125,22 @@ public class AVALONActionChitController {
     @RequestMapping(method = RequestMethod.POST)
     public List<Resource<AVALONActionChitEntity>> save(
             @RequestBody final AVALONActionChitEntity entity) {
-    
+            if (entity.getType() != null
+        && entity.getType().getId() == null) {
+      setTypeIdFromRepository(entity);
+        }
+
+        if (entity.getStrength() != null
+        && entity.getStrength().getId() == null) {
+      setStrengthIdFromRepository(entity);
+        }
+
+        if (entity.getMagicType() != null
+        && entity.getMagicType().getId() == null) {
+      setMagicTypeIdFromRepository(entity);
+        }
+
+
     
         AVALONActionChitEntity savedEntity = repository.save(entity);
         List<Resource<AVALONActionChitEntity>> list =
@@ -217,7 +235,22 @@ public class AVALONActionChitController {
         if (entity.getId() == null) {
             setIdFromRepository(entity);
         }
-    
+            if (entity.getType() != null
+        && entity.getType().getId() == null) {
+      setTypeIdFromRepository(entity);
+        }
+
+        if (entity.getStrength() != null
+        && entity.getStrength().getId() == null) {
+      setStrengthIdFromRepository(entity);
+        }
+
+        if (entity.getMagicType() != null
+        && entity.getMagicType().getId() == null) {
+      setMagicTypeIdFromRepository(entity);
+        }
+
+
     
         AVALONActionChitEntity savedEntity = repository.save(entity);
         List<Resource<AVALONActionChitEntity>> list = getById(
@@ -226,4 +259,210 @@ public class AVALONActionChitController {
         return list;
     }
 
+  private void setTypeIdFromRepository(
+      final AVALONActionChitEntity entity) {
+    AVALONActionTypeEntity memberEntity = null;
+    List<Resource<AVALONActionTypeEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONActionTypeController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONActionTypeEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getType()) != null) {
+          list = (List<Resource<AVALONActionTypeEntity>>) method
+              .invoke(
+                  AVALONActionTypeController.getInstance(),
+                  (String) field
+                      .get(entity.getType()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONActionTypeController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONActionTypeEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getType()) != null) {
+            list = (List<Resource<AVALONActionTypeEntity>>)
+                method.invoke(AVALONActionTypeController
+                    .getInstance(),(String) field.get(
+                        entity.getType()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONActionTypeEntity)
+          ((Resource) AVALONActionTypeController.getInstance().save(
+              entity.getType()).get(0)).getContent();
+    }
+    entity.setType(memberEntity);
+    list = null;
+    }
+
+  private void setStrengthIdFromRepository(
+      final AVALONActionChitEntity entity) {
+    AVALONVulnerabilityEntity memberEntity = null;
+    List<Resource<AVALONVulnerabilityEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONVulnerabilityController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONVulnerabilityEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getStrength()) != null) {
+          list = (List<Resource<AVALONVulnerabilityEntity>>) method
+              .invoke(
+                  AVALONVulnerabilityController.getInstance(),
+                  (String) field
+                      .get(entity.getStrength()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONVulnerabilityController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONVulnerabilityEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getStrength()) != null) {
+            list = (List<Resource<AVALONVulnerabilityEntity>>)
+                method.invoke(AVALONVulnerabilityController
+                    .getInstance(),(String) field.get(
+                        entity.getStrength()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONVulnerabilityEntity)
+          ((Resource) AVALONVulnerabilityController.getInstance().save(
+              entity.getStrength()).get(0)).getContent();
+    }
+    entity.setStrength(memberEntity);
+    list = null;
+    }
+
+  private void setMagicTypeIdFromRepository(
+      final AVALONActionChitEntity entity) {
+    AVALONMagicColorEntity memberEntity = null;
+    List<Resource<AVALONMagicColorEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONMagicColorController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONMagicColorEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getMagicType()) != null) {
+          list = (List<Resource<AVALONMagicColorEntity>>) method
+              .invoke(
+                  AVALONMagicColorController.getInstance(),
+                  (String) field
+                      .get(entity.getMagicType()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONMagicColorController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONMagicColorEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getMagicType()) != null) {
+            list = (List<Resource<AVALONMagicColorEntity>>)
+                method.invoke(AVALONMagicColorController
+                    .getInstance(),(String) field.get(
+                        entity.getMagicType()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONMagicColorEntity)
+          ((Resource) AVALONMagicColorController.getInstance().save(
+              entity.getMagicType()).get(0)).getContent();
+    }
+    entity.setMagicType(memberEntity);
+    list = null;
+    }
+
+
+    /**
+     * Gets a list of {@link AVALONActionChitEntity}s that share a fatigueAsterisk.
+     * @param fatigueAsterisk the action_chit' fatigueAsterisk
+     * @return {@link List}<{@link Resource}<{@link AVALONActionChitEntity}>>
+     */
+    @RequestMapping(path = "fatigue_asterisk/{fatigueAsterisk}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONActionChitEntity>> getByFatigueAsterisk(
+            @PathVariable final Long fatigueAsterisk) {
+        Iterator<AVALONActionChitEntity> iter = repository.findByFatigueAsterisk(fatigueAsterisk)
+                .iterator();
+        List<Resource<AVALONActionChitEntity>> resources =
+                new ArrayList<Resource<AVALONActionChitEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getActionChitResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
 }

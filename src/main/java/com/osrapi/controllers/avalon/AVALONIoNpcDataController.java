@@ -22,6 +22,7 @@ import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
 import com.osrapi.models.avalon.AVALONGenderEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
 import com.osrapi.models.avalon.AVALONAttackTypeEntity;
+import com.osrapi.models.avalon.AVALONMagicTypeEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
@@ -303,6 +304,11 @@ public class AVALONIoNpcDataController {
         if (entity.getNaturalWeaponType() != null
         && entity.getNaturalWeaponType().getId() == null) {
       setNaturalWeaponTypeIdFromRepository(entity);
+        }
+
+        if (entity.getUnalertedAttackSpell() != null
+        && entity.getUnalertedAttackSpell().getId() == null) {
+      setUnalertedAttackSpellIdFromRepository(entity);
         }
 
         if (entity.getUnalertedAttackWeight() != null
@@ -589,6 +595,11 @@ public class AVALONIoNpcDataController {
       setNaturalWeaponTypeIdFromRepository(entity);
         }
 
+        if (entity.getUnalertedAttackSpell() != null
+        && entity.getUnalertedAttackSpell().getId() == null) {
+      setUnalertedAttackSpellIdFromRepository(entity);
+        }
+
         if (entity.getUnalertedAttackWeight() != null
         && entity.getUnalertedAttackWeight().getId() == null) {
       setUnalertedAttackWeightIdFromRepository(entity);
@@ -858,6 +869,68 @@ public class AVALONIoNpcDataController {
               entity.getNaturalWeaponType()).get(0)).getContent();
     }
     entity.setNaturalWeaponType(memberEntity);
+    list = null;
+    }
+
+  private void setUnalertedAttackSpellIdFromRepository(
+      final AVALONIoNpcDataEntity entity) {
+    AVALONMagicTypeEntity memberEntity = null;
+    List<Resource<AVALONMagicTypeEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONMagicTypeController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONMagicTypeEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getUnalertedAttackSpell()) != null) {
+          list = (List<Resource<AVALONMagicTypeEntity>>) method
+              .invoke(
+                  AVALONMagicTypeController.getInstance(),
+                  (String) field
+                      .get(entity.getUnalertedAttackSpell()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONMagicTypeController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONMagicTypeEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getUnalertedAttackSpell()) != null) {
+            list = (List<Resource<AVALONMagicTypeEntity>>)
+                method.invoke(AVALONMagicTypeController
+                    .getInstance(),(String) field.get(
+                        entity.getUnalertedAttackSpell()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONMagicTypeEntity)
+          ((Resource) AVALONMagicTypeController.getInstance().save(
+              entity.getUnalertedAttackSpell()).get(0)).getContent();
+    }
+    entity.setUnalertedAttackSpell(memberEntity);
     list = null;
     }
 

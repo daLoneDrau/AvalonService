@@ -162,7 +162,7 @@ public final class AVALONIoNpcDataEntity {
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "unalertedAttackWeight")
     @JsonProperty("unalerted_attack_weight")
-  @NotNull
+  
     private AVALONVulnerabilityEntity    unalertedAttackWeight;
     /**
      * Gets the unalertedAttackWeight.
@@ -197,6 +197,28 @@ public final class AVALONIoNpcDataEntity {
      */
     public void setUnalertedAttackStars(final Long val) {
         unalertedAttackStars = val;
+    }
+
+    /** the unalertedAttackSpell. */
+    @ManyToOne(targetEntity = AVALONMagicTypeEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "unalertedAttackSpell")
+    @JsonProperty("unalerted_attack_spell")
+  
+    private AVALONMagicTypeEntity    unalertedAttackSpell;
+    /**
+     * Gets the unalertedAttackSpell.
+     * @return {@link AVALONMagicTypeEntity}
+     */
+    public AVALONMagicTypeEntity getUnalertedAttackSpell() {
+        return unalertedAttackSpell;
+    }
+    /**
+     * Sets the unalertedAttackSpell.
+     * @param val the new value
+     */
+    public void setUnalertedAttackSpell(final AVALONMagicTypeEntity val) {
+        unalertedAttackSpell = val;
     }
 
     /** the unalertedAttackSpeed. */

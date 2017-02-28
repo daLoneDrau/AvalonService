@@ -73,5 +73,91 @@ public final class AVALONActionChitEntity {
         id = val;
     }
 
+    /** the fatigueAsterisk. */
+    @Column(name = "fatigue_asterisk")
+    @JsonProperty("fatigue_asterisk")
+    @NotNull
+    private long                    fatigueAsterisk;
+    /**
+     * Gets the fatigueAsterisk.
+     * @return {@link long}
+     */
+    public long getFatigueAsterisk() {
+        return fatigueAsterisk;
+    }
+    /**
+     * Sets the fatigueAsterisk.
+     * @param val the new value
+     */
+    public void setFatigueAsterisk(final long val) {
+        fatigueAsterisk = val;
+    }
+
+    /** the magicType. */
+    @ManyToOne(targetEntity = AVALONMagicColorEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "magicType")
+    @JsonProperty("magic_color")
+  @NotNull
+    private AVALONMagicColorEntity    magicType;
+    /**
+     * Gets the magicType.
+     * @return {@link AVALONMagicColorEntity}
+     */
+    public AVALONMagicColorEntity getMagicType() {
+        return magicType;
+    }
+    /**
+     * Sets the magicType.
+     * @param val the new value
+     */
+    public void setMagicType(final AVALONMagicColorEntity val) {
+        magicType = val;
+    }
+
+    /** the strength. */
+    @ManyToOne(targetEntity = AVALONVulnerabilityEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "strength")
+    @JsonProperty("vulnerability")
+  @NotNull
+    private AVALONVulnerabilityEntity    strength;
+    /**
+     * Gets the strength.
+     * @return {@link AVALONVulnerabilityEntity}
+     */
+    public AVALONVulnerabilityEntity getStrength() {
+        return strength;
+    }
+    /**
+     * Sets the strength.
+     * @param val the new value
+     */
+    public void setStrength(final AVALONVulnerabilityEntity val) {
+        strength = val;
+    }
+
+    /** the type. */
+    @ManyToOne(targetEntity = AVALONActionTypeEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "type")
+    @JsonProperty("action_type")
+  @NotNull
+    private AVALONActionTypeEntity    type;
+    /**
+     * Gets the type.
+     * @return {@link AVALONActionTypeEntity}
+     */
+    public AVALONActionTypeEntity getType() {
+        return type;
+    }
+    /**
+     * Sets the type.
+     * @param val the new value
+     */
+    public void setType(final AVALONActionTypeEntity val) {
+        type = val;
+    }
+
 }
 

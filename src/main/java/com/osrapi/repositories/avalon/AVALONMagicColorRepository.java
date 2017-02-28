@@ -22,9 +22,9 @@ extends CrudRepository<AVALONMagicColorEntity, Long> {
 	 */
 	List<AVALONMagicColorEntity> findByLongName(String longName);
 	/**
-	 * Retrieves a list of magic colors by their shortName.
-	 * @param shortName the shortName
+	 * Retrieves a list of magic colors by their name.
+	 * @param name the name
 	 * @return {@link List}<{@link AVALONMagicColorEntity}>
 	 */
-	List<AVALONMagicColorEntity> findByShortName(String shortName);
+	List<AVALONMagicColorEntity> findByName(String name);
 }

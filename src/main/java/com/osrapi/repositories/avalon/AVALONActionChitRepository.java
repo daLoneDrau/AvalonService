@@ -15,4 +15,10 @@ import com.osrapi.models.avalon.AVALONActionChitEntity;
 @Repository
 public interface AVALONActionChitRepository
 extends CrudRepository<AVALONActionChitEntity, Long> {
+	/**
+	 * Retrieves a list of action chits by their fatigueAsterisk.
+	 * @param fatigueAsterisk the fatigueAsterisk
+	 * @return {@link List}<{@link AVALONActionChitEntity}>
+	 */
+	List<AVALONActionChitEntity> findByFatigueAsterisk(Long fatigueAsterisk);
 }

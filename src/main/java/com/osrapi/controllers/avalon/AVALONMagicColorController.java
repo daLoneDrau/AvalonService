@@ -246,15 +246,15 @@ public class AVALONMagicColorController {
         return resources;
     }
     /**
-     * Gets a list of {@link AVALONMagicColorEntity}s that share a shortName.
-     * @param shortName the magic_color' shortName
+     * Gets a list of {@link AVALONMagicColorEntity}s that share a name.
+     * @param name the magic_color' name
      * @return {@link List}<{@link Resource}<{@link AVALONMagicColorEntity}>>
      */
-    @RequestMapping(path = "short_name/{shortName}",
+    @RequestMapping(path = "name/{name}",
             method = RequestMethod.GET)
-    public List<Resource<AVALONMagicColorEntity>> getByShortName(
-            @PathVariable final String shortName) {
-        Iterator<AVALONMagicColorEntity> iter = repository.findByShortName(shortName)
+    public List<Resource<AVALONMagicColorEntity>> getByName(
+            @PathVariable final String name) {
+        Iterator<AVALONMagicColorEntity> iter = repository.findByName(name)
                 .iterator();
         List<Resource<AVALONMagicColorEntity>> resources =
                 new ArrayList<Resource<AVALONMagicColorEntity>>();
