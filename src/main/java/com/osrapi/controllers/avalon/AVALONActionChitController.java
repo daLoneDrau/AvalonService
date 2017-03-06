@@ -447,6 +447,25 @@ public class AVALONActionChitController {
 
 
     /**
+     * Gets a list of {@link AVALONActionChitEntity}s that share a speed.
+     * @param speed the action_chit' speed
+     * @return {@link List}<{@link Resource}<{@link AVALONActionChitEntity}>>
+     */
+    @RequestMapping(path = "speed/{speed}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONActionChitEntity>> getBySpeed(
+            @PathVariable final Long speed) {
+        Iterator<AVALONActionChitEntity> iter = repository.findBySpeed(speed)
+                .iterator();
+        List<Resource<AVALONActionChitEntity>> resources =
+                new ArrayList<Resource<AVALONActionChitEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getActionChitResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
      * Gets a list of {@link AVALONActionChitEntity}s that share a fatigueAsterisk.
      * @param fatigueAsterisk the action_chit' fatigueAsterisk
      * @return {@link List}<{@link Resource}<{@link AVALONActionChitEntity}>>
@@ -456,6 +475,25 @@ public class AVALONActionChitController {
     public List<Resource<AVALONActionChitEntity>> getByFatigueAsterisk(
             @PathVariable final Long fatigueAsterisk) {
         Iterator<AVALONActionChitEntity> iter = repository.findByFatigueAsterisk(fatigueAsterisk)
+                .iterator();
+        List<Resource<AVALONActionChitEntity>> resources =
+                new ArrayList<Resource<AVALONActionChitEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getActionChitResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
+     * Gets a list of {@link AVALONActionChitEntity}s that share a code.
+     * @param code the action_chit' code
+     * @return {@link List}<{@link Resource}<{@link AVALONActionChitEntity}>>
+     */
+    @RequestMapping(path = "code/{code}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONActionChitEntity>> getByCode(
+            @PathVariable final String code) {
+        Iterator<AVALONActionChitEntity> iter = repository.findByCode(code)
                 .iterator();
         List<Resource<AVALONActionChitEntity>> resources =
                 new ArrayList<Resource<AVALONActionChitEntity>>();

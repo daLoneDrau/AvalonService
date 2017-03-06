@@ -16,11 +16,11 @@ import com.osrapi.models.avalon.AVALONIoPcDataEntity;
 public interface AVALONIoPcDataRepository
 extends CrudRepository<AVALONIoPcDataEntity, Long> {
 	/**
-	 * Retrieves a list of io pc datas by their bags.
-	 * @param bags the bags
+	 * Retrieves a list of io pc datas by their evaluation.
+	 * @param evaluation the evaluation
 	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
 	 */
-	List<AVALONIoPcDataEntity> findByBags(Long bags);
+	List<AVALONIoPcDataEntity> findByEvaluation(String evaluation);
 	/**
 	 * Retrieves a list of io pc datas by their gold.
 	 * @param gold the gold
@@ -34,21 +34,33 @@ extends CrudRepository<AVALONIoPcDataEntity, Long> {
 	 */
 	List<AVALONIoPcDataEntity> findByInterfaceFlags(Long interfaceFlags);
 	/**
-	 * Retrieves a list of io pc datas by their level.
-	 * @param level the level
-	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
-	 */
-	List<AVALONIoPcDataEntity> findByLevel(Long level);
-	/**
 	 * Retrieves a list of io pc datas by their name.
 	 * @param name the name
 	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
 	 */
 	List<AVALONIoPcDataEntity> findByName(String name);
 	/**
-	 * Retrieves a list of io pc datas by their xp.
-	 * @param xp the xp
+	 * Retrieves a list of io pc datas by their stageOneName.
+	 * @param stageOneName the stageOneName
 	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
 	 */
-	List<AVALONIoPcDataEntity> findByXp(Long xp);
+	List<AVALONIoPcDataEntity> findByStageOneName(String stageOneName);
+	/**
+	 * Retrieves a list of io pc datas by their stageTwoName.
+	 * @param stageTwoName the stageTwoName
+	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
+	 */
+	List<AVALONIoPcDataEntity> findByStageTwoName(String stageTwoName);
+	/**
+	 * Retrieves a list of io pc datas by their stageThreeName.
+	 * @param stageThreeName the stageThreeName
+	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
+	 */
+	List<AVALONIoPcDataEntity> findByStageThreeName(String stageThreeName);
+	/**
+	 * Retrieves a list of io pc datas by their startingLocation.
+	 * @param startingLocation the startingLocation
+	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
+	 */
+	List<AVALONIoPcDataEntity> findByStartingLocation(String startingLocation);
 }

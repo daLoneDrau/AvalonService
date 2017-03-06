@@ -73,32 +73,72 @@ public final class AVALONActionChitEntity {
         id = val;
     }
 
+    /** the code. */
+    @Column(name = "code")
+    @JsonProperty("code")
+    @NotNull
+    private String                    code;
+    /**
+     * Gets the code.
+     * @return {@link String}
+     */
+    public String getCode() {
+        return code;
+    }
+    /**
+     * Sets the code.
+     * @param val the new value
+     */
+    public void setCode(final String val) {
+        code = val;
+    }
+
     /** the fatigueAsterisk. */
     @Column(name = "fatigue_asterisk")
     @JsonProperty("fatigue_asterisk")
-    @NotNull
-    private long                    fatigueAsterisk;
+    
+    private Long                    fatigueAsterisk;
     /**
      * Gets the fatigueAsterisk.
-     * @return {@link long}
+     * @return {@link Long}
      */
-    public long getFatigueAsterisk() {
+    public Long getFatigueAsterisk() {
         return fatigueAsterisk;
     }
     /**
      * Sets the fatigueAsterisk.
      * @param val the new value
      */
-    public void setFatigueAsterisk(final long val) {
+    public void setFatigueAsterisk(final Long val) {
         fatigueAsterisk = val;
+    }
+
+    /** the speed. */
+    @Column(name = "speed")
+    @JsonProperty("speed")
+    @NotNull
+    private long                    speed;
+    /**
+     * Gets the speed.
+     * @return {@link long}
+     */
+    public long getSpeed() {
+        return speed;
+    }
+    /**
+     * Sets the speed.
+     * @param val the new value
+     */
+    public void setSpeed(final long val) {
+        speed = val;
     }
 
     /** the magicType. */
     @ManyToOne(targetEntity = AVALONMagicColorEntity.class, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "magicType")
-    @JsonProperty("magic_color")
-  @NotNull
+    @JsonProperty("magic_type")
+  
     private AVALONMagicColorEntity    magicType;
     /**
      * Gets the magicType.
@@ -119,8 +159,8 @@ public final class AVALONActionChitEntity {
     @ManyToOne(targetEntity = AVALONVulnerabilityEntity.class, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "strength")
-    @JsonProperty("vulnerability")
-  @NotNull
+    @JsonProperty("strength")
+  
     private AVALONVulnerabilityEntity    strength;
     /**
      * Gets the strength.
@@ -141,7 +181,7 @@ public final class AVALONActionChitEntity {
     @ManyToOne(targetEntity = AVALONActionTypeEntity.class, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "type")
-    @JsonProperty("action_type")
+    @JsonProperty("type")
   @NotNull
     private AVALONActionTypeEntity    type;
     /**
