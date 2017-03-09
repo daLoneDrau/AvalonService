@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.osrapi.models.avalon.AVALONIoPcDataEntity;
 import com.osrapi.models.avalon.AVALONAdvantageEntity;
+import com.osrapi.models.avalon.AVALONAdvantageEntity;
 import com.osrapi.models.avalon.AVALONGenderEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
 import com.osrapi.models.avalon.AVALONGroupEntity;
-import com.osrapi.models.avalon.AVALONActionChitEntity;
+import com.osrapi.models.avalon.AVALONDevelopmentActionsEntity;
 
 import com.osrapi.repositories.avalon.AVALONIoPcDataRepository;
 
@@ -361,55 +362,53 @@ public class AVALONIoPcDataController {
     if (entity.getStageOneActions() != null
                 && !entity.getStageOneActions().isEmpty()) {
             for (int i = entity.getStageOneActions().size() - 1; i >= 0; i--) {
-                AVALONActionChitEntity stageOneActions = null;
-                List<Resource<AVALONActionChitEntity>> list = null;
+                AVALONDevelopmentActionsEntity stageOneActions = null;
+                List<Resource<AVALONDevelopmentActionsEntity>> list = null;
                 try {
                     Method method = null;
           try {
-            method = AVALONActionChitController.class.getDeclaredMethod(
+            method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                 "getByName", new Class[] { String.class });
           } catch (NoSuchMethodException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by name");
                     }
                     Field field = null;
           try {
-            field = AVALONActionChitEntity.class
+            field = AVALONDevelopmentActionsEntity.class
                 .getDeclaredField("name");
           } catch (NoSuchFieldException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by name");
                     }
                     if (method != null
                             && field != null) {
                         field.setAccessible(true);
                         if (field.get(entity.getStageOneActions().get(i)) != null) {
-                            list = (List<Resource<AVALONActionChitEntity>>) method
+                            list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                     .invoke(
-                                            AVALONActionChitController.getInstance(),
+                                            AVALONDevelopmentActionsController.getInstance(),
                                             (String) field.get(entity.getStageOneActions().get(i)));
                         }
                     }
                     if (list == null) {
             try {
-              method = AVALONActionChitController.class.getDeclaredMethod(
+              method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                   "getByCode", new Class[] { String.class });
             } catch (NoSuchMethodException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by code");
             }
             try {
-              field = AVALONActionChitEntity.class.getDeclaredField(
+              field = AVALONDevelopmentActionsEntity.class.getDeclaredField(
                   "code");
             } catch (NoSuchFieldException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by code");
             }
                         if (method != null
                                 && field != null) {
-                        	System.out.println("look up action by code "
-                                +entity.getStageOneActions().get(i).getCode());
                             field.setAccessible(true);
                             if (field.get(entity.getStageOneActions().get(i)) != null) {
-                                list = (List<Resource<AVALONActionChitEntity>>) method
+                                list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                         .invoke(
-                                                AVALONActionChitController
+                                                AVALONDevelopmentActionsController
                                                         .getInstance(),
                                                 (String) field
                                                         .get(entity.getStageOneActions().get(i)));
@@ -421,14 +420,14 @@ public class AVALONIoPcDataController {
                 } catch (SecurityException | IllegalArgumentException
                         | IllegalAccessException
                         | InvocationTargetException e) {
-              System.out.println("CANNOT get embedded lookup Entity AVALONActionChitEntity by name or code");
+              System.out.println("CANNOT get embedded lookup Entity AVALONDevelopmentActionsEntity by name or code");
                 }
                 if (list != null
                         && !list.isEmpty()) {
                     stageOneActions = list.get(0).getContent();
                 }
                 if (stageOneActions == null) {
-                    stageOneActions = (AVALONActionChitEntity) ((Resource) AVALONActionChitController
+                    stageOneActions = (AVALONDevelopmentActionsEntity) ((Resource) AVALONDevelopmentActionsController
                             .getInstance()
                             .save(entity.getStageOneActions().get(i)).get(0)).getContent();
                 }
@@ -440,55 +439,53 @@ public class AVALONIoPcDataController {
     if (entity.getStageTwoActions() != null
                 && !entity.getStageTwoActions().isEmpty()) {
             for (int i = entity.getStageTwoActions().size() - 1; i >= 0; i--) {
-                AVALONActionChitEntity stageTwoActions = null;
-                List<Resource<AVALONActionChitEntity>> list = null;
+                AVALONDevelopmentActionsEntity stageTwoActions = null;
+                List<Resource<AVALONDevelopmentActionsEntity>> list = null;
                 try {
                     Method method = null;
           try {
-            method = AVALONActionChitController.class.getDeclaredMethod(
+            method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                 "getByName", new Class[] { String.class });
           } catch (NoSuchMethodException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by name");
                     }
                     Field field = null;
           try {
-            field = AVALONActionChitEntity.class
+            field = AVALONDevelopmentActionsEntity.class
                 .getDeclaredField("name");
           } catch (NoSuchFieldException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by name");
                     }
                     if (method != null
                             && field != null) {
                         field.setAccessible(true);
                         if (field.get(entity.getStageTwoActions().get(i)) != null) {
-                            list = (List<Resource<AVALONActionChitEntity>>) method
+                            list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                     .invoke(
-                                            AVALONActionChitController.getInstance(),
+                                            AVALONDevelopmentActionsController.getInstance(),
                                             (String) field.get(entity.getStageTwoActions().get(i)));
                         }
                     }
                     if (list == null) {
             try {
-              method = AVALONActionChitController.class.getDeclaredMethod(
+              method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                   "getByCode", new Class[] { String.class });
             } catch (NoSuchMethodException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by code");
             }
             try {
-              field = AVALONActionChitEntity.class.getDeclaredField(
+              field = AVALONDevelopmentActionsEntity.class.getDeclaredField(
                   "code");
             } catch (NoSuchFieldException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by code");
             }
                         if (method != null
                                 && field != null) {
-                        	System.out.println("look up action by code "
-                                    +entity.getStageTwoActions().get(i).getCode());
                             field.setAccessible(true);
                             if (field.get(entity.getStageTwoActions().get(i)) != null) {
-                                list = (List<Resource<AVALONActionChitEntity>>) method
+                                list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                         .invoke(
-                                                AVALONActionChitController
+                                                AVALONDevelopmentActionsController
                                                         .getInstance(),
                                                 (String) field
                                                         .get(entity.getStageTwoActions().get(i)));
@@ -500,14 +497,14 @@ public class AVALONIoPcDataController {
                 } catch (SecurityException | IllegalArgumentException
                         | IllegalAccessException
                         | InvocationTargetException e) {
-              System.out.println("CANNOT get embedded lookup Entity AVALONActionChitEntity by name or code");
+              System.out.println("CANNOT get embedded lookup Entity AVALONDevelopmentActionsEntity by name or code");
                 }
                 if (list != null
                         && !list.isEmpty()) {
                     stageTwoActions = list.get(0).getContent();
                 }
                 if (stageTwoActions == null) {
-                    stageTwoActions = (AVALONActionChitEntity) ((Resource) AVALONActionChitController
+                    stageTwoActions = (AVALONDevelopmentActionsEntity) ((Resource) AVALONDevelopmentActionsController
                             .getInstance()
                             .save(entity.getStageTwoActions().get(i)).get(0)).getContent();
                 }
@@ -519,55 +516,53 @@ public class AVALONIoPcDataController {
     if (entity.getStageThreeActions() != null
                 && !entity.getStageThreeActions().isEmpty()) {
             for (int i = entity.getStageThreeActions().size() - 1; i >= 0; i--) {
-                AVALONActionChitEntity stageThreeActions = null;
-                List<Resource<AVALONActionChitEntity>> list = null;
+                AVALONDevelopmentActionsEntity stageThreeActions = null;
+                List<Resource<AVALONDevelopmentActionsEntity>> list = null;
                 try {
                     Method method = null;
           try {
-            method = AVALONActionChitController.class.getDeclaredMethod(
+            method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                 "getByName", new Class[] { String.class });
           } catch (NoSuchMethodException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by name");
                     }
                     Field field = null;
           try {
-            field = AVALONActionChitEntity.class
+            field = AVALONDevelopmentActionsEntity.class
                 .getDeclaredField("name");
           } catch (NoSuchFieldException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by name");
                     }
                     if (method != null
                             && field != null) {
                         field.setAccessible(true);
                         if (field.get(entity.getStageThreeActions().get(i)) != null) {
-                            list = (List<Resource<AVALONActionChitEntity>>) method
+                            list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                     .invoke(
-                                            AVALONActionChitController.getInstance(),
+                                            AVALONDevelopmentActionsController.getInstance(),
                                             (String) field.get(entity.getStageThreeActions().get(i)));
                         }
                     }
                     if (list == null) {
             try {
-              method = AVALONActionChitController.class.getDeclaredMethod(
+              method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                   "getByCode", new Class[] { String.class });
             } catch (NoSuchMethodException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by code");
             }
             try {
-              field = AVALONActionChitEntity.class.getDeclaredField(
+              field = AVALONDevelopmentActionsEntity.class.getDeclaredField(
                   "code");
             } catch (NoSuchFieldException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by code");
             }
                         if (method != null
                                 && field != null) {
-                        	System.out.println("look up action by code "
-                                    +entity.getStageThreeActions().get(i).getCode());
                             field.setAccessible(true);
                             if (field.get(entity.getStageThreeActions().get(i)) != null) {
-                                list = (List<Resource<AVALONActionChitEntity>>) method
+                                list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                         .invoke(
-                                                AVALONActionChitController
+                                                AVALONDevelopmentActionsController
                                                         .getInstance(),
                                                 (String) field
                                                         .get(entity.getStageThreeActions().get(i)));
@@ -579,14 +574,14 @@ public class AVALONIoPcDataController {
                 } catch (SecurityException | IllegalArgumentException
                         | IllegalAccessException
                         | InvocationTargetException e) {
-              System.out.println("CANNOT get embedded lookup Entity AVALONActionChitEntity by name or code");
+              System.out.println("CANNOT get embedded lookup Entity AVALONDevelopmentActionsEntity by name or code");
                 }
                 if (list != null
                         && !list.isEmpty()) {
                     stageThreeActions = list.get(0).getContent();
                 }
                 if (stageThreeActions == null) {
-                    stageThreeActions = (AVALONActionChitEntity) ((Resource) AVALONActionChitController
+                    stageThreeActions = (AVALONDevelopmentActionsEntity) ((Resource) AVALONDevelopmentActionsController
                             .getInstance()
                             .save(entity.getStageThreeActions().get(i)).get(0)).getContent();
                 }
@@ -598,55 +593,53 @@ public class AVALONIoPcDataController {
     if (entity.getStageFourActions() != null
                 && !entity.getStageFourActions().isEmpty()) {
             for (int i = entity.getStageFourActions().size() - 1; i >= 0; i--) {
-                AVALONActionChitEntity stageFourActions = null;
-                List<Resource<AVALONActionChitEntity>> list = null;
+                AVALONDevelopmentActionsEntity stageFourActions = null;
+                List<Resource<AVALONDevelopmentActionsEntity>> list = null;
                 try {
                     Method method = null;
           try {
-            method = AVALONActionChitController.class.getDeclaredMethod(
+            method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                 "getByName", new Class[] { String.class });
           } catch (NoSuchMethodException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by name");
                     }
                     Field field = null;
           try {
-            field = AVALONActionChitEntity.class
+            field = AVALONDevelopmentActionsEntity.class
                 .getDeclaredField("name");
           } catch (NoSuchFieldException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by name");
                     }
                     if (method != null
                             && field != null) {
                         field.setAccessible(true);
                         if (field.get(entity.getStageFourActions().get(i)) != null) {
-                            list = (List<Resource<AVALONActionChitEntity>>) method
+                            list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                     .invoke(
-                                            AVALONActionChitController.getInstance(),
+                                            AVALONDevelopmentActionsController.getInstance(),
                                             (String) field.get(entity.getStageFourActions().get(i)));
                         }
                     }
                     if (list == null) {
             try {
-              method = AVALONActionChitController.class.getDeclaredMethod(
+              method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                   "getByCode", new Class[] { String.class });
             } catch (NoSuchMethodException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by code");
             }
             try {
-              field = AVALONActionChitEntity.class.getDeclaredField(
+              field = AVALONDevelopmentActionsEntity.class.getDeclaredField(
                   "code");
             } catch (NoSuchFieldException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by code");
             }
                         if (method != null
                                 && field != null) {
-                        	System.out.println("look up action by code "
-                                    +entity.getStageFourActions().get(i).getCode());
                             field.setAccessible(true);
                             if (field.get(entity.getStageFourActions().get(i)) != null) {
-                                list = (List<Resource<AVALONActionChitEntity>>) method
+                                list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                         .invoke(
-                                                AVALONActionChitController
+                                                AVALONDevelopmentActionsController
                                                         .getInstance(),
                                                 (String) field
                                                         .get(entity.getStageFourActions().get(i)));
@@ -658,14 +651,14 @@ public class AVALONIoPcDataController {
                 } catch (SecurityException | IllegalArgumentException
                         | IllegalAccessException
                         | InvocationTargetException e) {
-              System.out.println("CANNOT get embedded lookup Entity AVALONActionChitEntity by name or code");
+              System.out.println("CANNOT get embedded lookup Entity AVALONDevelopmentActionsEntity by name or code");
                 }
                 if (list != null
                         && !list.isEmpty()) {
                     stageFourActions = list.get(0).getContent();
                 }
                 if (stageFourActions == null) {
-                    stageFourActions = (AVALONActionChitEntity) ((Resource) AVALONActionChitController
+                    stageFourActions = (AVALONDevelopmentActionsEntity) ((Resource) AVALONDevelopmentActionsController
                             .getInstance()
                             .save(entity.getStageFourActions().get(i)).get(0)).getContent();
                 }
@@ -1100,53 +1093,53 @@ public class AVALONIoPcDataController {
     if (entity.getStageOneActions() != null
                 && !entity.getStageOneActions().isEmpty()) {
             for (int i = entity.getStageOneActions().size() - 1; i >= 0; i--) {
-                AVALONActionChitEntity stageOneActions = null;
-                List<Resource<AVALONActionChitEntity>> list = null;
+                AVALONDevelopmentActionsEntity stageOneActions = null;
+                List<Resource<AVALONDevelopmentActionsEntity>> list = null;
                 try {
                     Method method = null;
           try {
-            method = AVALONActionChitController.class.getDeclaredMethod(
+            method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                 "getByName", new Class[] { String.class });
           } catch (NoSuchMethodException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by name");
                     }
                     Field field = null;
           try {
-            field = AVALONActionChitEntity.class
+            field = AVALONDevelopmentActionsEntity.class
                 .getDeclaredField("name");
           } catch (NoSuchFieldException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by name");
                     }
                     if (method != null
                             && field != null) {
                         field.setAccessible(true);
                         if (field.get(entity.getStageOneActions().get(i)) != null) {
-                            list = (List<Resource<AVALONActionChitEntity>>) method
+                            list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                     .invoke(
-                                            AVALONActionChitController.getInstance(),
+                                            AVALONDevelopmentActionsController.getInstance(),
                                             (String) field.get(entity.getStageOneActions().get(i)));
                         }
                     }
                     if (list == null) {
             try {
-              method = AVALONActionChitController.class.getDeclaredMethod(
+              method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                   "getByCode", new Class[] { String.class });
             } catch (NoSuchMethodException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by code");
             }
             try {
-              field = AVALONActionChitEntity.class.getDeclaredField(
+              field = AVALONDevelopmentActionsEntity.class.getDeclaredField(
                   "code");
             } catch (NoSuchFieldException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by code");
             }
                         if (method != null
                                 && field != null) {
                             field.setAccessible(true);
                             if (field.get(entity.getStageOneActions().get(i)) != null) {
-                                list = (List<Resource<AVALONActionChitEntity>>) method
+                                list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                         .invoke(
-                                                AVALONActionChitController
+                                                AVALONDevelopmentActionsController
                                                         .getInstance(),
                                                 (String) field
                                                         .get(entity.getStageOneActions().get(i)));
@@ -1158,14 +1151,14 @@ public class AVALONIoPcDataController {
                 } catch (SecurityException | IllegalArgumentException
                         | IllegalAccessException
                         | InvocationTargetException e) {
-              System.out.println("CANNOT get embedded lookup Entity AVALONActionChitEntity by name or code");
+              System.out.println("CANNOT get embedded lookup Entity AVALONDevelopmentActionsEntity by name or code");
                 }
                 if (list != null
                         && !list.isEmpty()) {
                     stageOneActions = list.get(0).getContent();
                 }
                 if (stageOneActions == null) {
-                    stageOneActions = (AVALONActionChitEntity) ((Resource) AVALONActionChitController
+                    stageOneActions = (AVALONDevelopmentActionsEntity) ((Resource) AVALONDevelopmentActionsController
                             .getInstance()
                             .save(entity.getStageOneActions().get(i)).get(0)).getContent();
                 }
@@ -1177,53 +1170,53 @@ public class AVALONIoPcDataController {
     if (entity.getStageTwoActions() != null
                 && !entity.getStageTwoActions().isEmpty()) {
             for (int i = entity.getStageTwoActions().size() - 1; i >= 0; i--) {
-                AVALONActionChitEntity stageTwoActions = null;
-                List<Resource<AVALONActionChitEntity>> list = null;
+                AVALONDevelopmentActionsEntity stageTwoActions = null;
+                List<Resource<AVALONDevelopmentActionsEntity>> list = null;
                 try {
                     Method method = null;
           try {
-            method = AVALONActionChitController.class.getDeclaredMethod(
+            method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                 "getByName", new Class[] { String.class });
           } catch (NoSuchMethodException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by name");
                     }
                     Field field = null;
           try {
-            field = AVALONActionChitEntity.class
+            field = AVALONDevelopmentActionsEntity.class
                 .getDeclaredField("name");
           } catch (NoSuchFieldException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by name");
                     }
                     if (method != null
                             && field != null) {
                         field.setAccessible(true);
                         if (field.get(entity.getStageTwoActions().get(i)) != null) {
-                            list = (List<Resource<AVALONActionChitEntity>>) method
+                            list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                     .invoke(
-                                            AVALONActionChitController.getInstance(),
+                                            AVALONDevelopmentActionsController.getInstance(),
                                             (String) field.get(entity.getStageTwoActions().get(i)));
                         }
                     }
                     if (list == null) {
             try {
-              method = AVALONActionChitController.class.getDeclaredMethod(
+              method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                   "getByCode", new Class[] { String.class });
             } catch (NoSuchMethodException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by code");
             }
             try {
-              field = AVALONActionChitEntity.class.getDeclaredField(
+              field = AVALONDevelopmentActionsEntity.class.getDeclaredField(
                   "code");
             } catch (NoSuchFieldException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by code");
             }
                         if (method != null
                                 && field != null) {
                             field.setAccessible(true);
                             if (field.get(entity.getStageTwoActions().get(i)) != null) {
-                                list = (List<Resource<AVALONActionChitEntity>>) method
+                                list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                         .invoke(
-                                                AVALONActionChitController
+                                                AVALONDevelopmentActionsController
                                                         .getInstance(),
                                                 (String) field
                                                         .get(entity.getStageTwoActions().get(i)));
@@ -1235,14 +1228,14 @@ public class AVALONIoPcDataController {
                 } catch (SecurityException | IllegalArgumentException
                         | IllegalAccessException
                         | InvocationTargetException e) {
-              System.out.println("CANNOT get embedded lookup Entity AVALONActionChitEntity by name or code");
+              System.out.println("CANNOT get embedded lookup Entity AVALONDevelopmentActionsEntity by name or code");
                 }
                 if (list != null
                         && !list.isEmpty()) {
                     stageTwoActions = list.get(0).getContent();
                 }
                 if (stageTwoActions == null) {
-                    stageTwoActions = (AVALONActionChitEntity) ((Resource) AVALONActionChitController
+                    stageTwoActions = (AVALONDevelopmentActionsEntity) ((Resource) AVALONDevelopmentActionsController
                             .getInstance()
                             .save(entity.getStageTwoActions().get(i)).get(0)).getContent();
                 }
@@ -1254,53 +1247,53 @@ public class AVALONIoPcDataController {
     if (entity.getStageThreeActions() != null
                 && !entity.getStageThreeActions().isEmpty()) {
             for (int i = entity.getStageThreeActions().size() - 1; i >= 0; i--) {
-                AVALONActionChitEntity stageThreeActions = null;
-                List<Resource<AVALONActionChitEntity>> list = null;
+                AVALONDevelopmentActionsEntity stageThreeActions = null;
+                List<Resource<AVALONDevelopmentActionsEntity>> list = null;
                 try {
                     Method method = null;
           try {
-            method = AVALONActionChitController.class.getDeclaredMethod(
+            method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                 "getByName", new Class[] { String.class });
           } catch (NoSuchMethodException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by name");
                     }
                     Field field = null;
           try {
-            field = AVALONActionChitEntity.class
+            field = AVALONDevelopmentActionsEntity.class
                 .getDeclaredField("name");
           } catch (NoSuchFieldException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by name");
                     }
                     if (method != null
                             && field != null) {
                         field.setAccessible(true);
                         if (field.get(entity.getStageThreeActions().get(i)) != null) {
-                            list = (List<Resource<AVALONActionChitEntity>>) method
+                            list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                     .invoke(
-                                            AVALONActionChitController.getInstance(),
+                                            AVALONDevelopmentActionsController.getInstance(),
                                             (String) field.get(entity.getStageThreeActions().get(i)));
                         }
                     }
                     if (list == null) {
             try {
-              method = AVALONActionChitController.class.getDeclaredMethod(
+              method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                   "getByCode", new Class[] { String.class });
             } catch (NoSuchMethodException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by code");
             }
             try {
-              field = AVALONActionChitEntity.class.getDeclaredField(
+              field = AVALONDevelopmentActionsEntity.class.getDeclaredField(
                   "code");
             } catch (NoSuchFieldException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by code");
             }
                         if (method != null
                                 && field != null) {
                             field.setAccessible(true);
                             if (field.get(entity.getStageThreeActions().get(i)) != null) {
-                                list = (List<Resource<AVALONActionChitEntity>>) method
+                                list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                         .invoke(
-                                                AVALONActionChitController
+                                                AVALONDevelopmentActionsController
                                                         .getInstance(),
                                                 (String) field
                                                         .get(entity.getStageThreeActions().get(i)));
@@ -1312,14 +1305,14 @@ public class AVALONIoPcDataController {
                 } catch (SecurityException | IllegalArgumentException
                         | IllegalAccessException
                         | InvocationTargetException e) {
-              System.out.println("CANNOT get embedded lookup Entity AVALONActionChitEntity by name or code");
+              System.out.println("CANNOT get embedded lookup Entity AVALONDevelopmentActionsEntity by name or code");
                 }
                 if (list != null
                         && !list.isEmpty()) {
                     stageThreeActions = list.get(0).getContent();
                 }
                 if (stageThreeActions == null) {
-                    stageThreeActions = (AVALONActionChitEntity) ((Resource) AVALONActionChitController
+                    stageThreeActions = (AVALONDevelopmentActionsEntity) ((Resource) AVALONDevelopmentActionsController
                             .getInstance()
                             .save(entity.getStageThreeActions().get(i)).get(0)).getContent();
                 }
@@ -1331,53 +1324,53 @@ public class AVALONIoPcDataController {
     if (entity.getStageFourActions() != null
                 && !entity.getStageFourActions().isEmpty()) {
             for (int i = entity.getStageFourActions().size() - 1; i >= 0; i--) {
-                AVALONActionChitEntity stageFourActions = null;
-                List<Resource<AVALONActionChitEntity>> list = null;
+                AVALONDevelopmentActionsEntity stageFourActions = null;
+                List<Resource<AVALONDevelopmentActionsEntity>> list = null;
                 try {
                     Method method = null;
           try {
-            method = AVALONActionChitController.class.getDeclaredMethod(
+            method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                 "getByName", new Class[] { String.class });
           } catch (NoSuchMethodException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by name");
                     }
                     Field field = null;
           try {
-            field = AVALONActionChitEntity.class
+            field = AVALONDevelopmentActionsEntity.class
                 .getDeclaredField("name");
           } catch (NoSuchFieldException e) {
-            System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by name");
+            System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by name");
                     }
                     if (method != null
                             && field != null) {
                         field.setAccessible(true);
                         if (field.get(entity.getStageFourActions().get(i)) != null) {
-                            list = (List<Resource<AVALONActionChitEntity>>) method
+                            list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                     .invoke(
-                                            AVALONActionChitController.getInstance(),
+                                            AVALONDevelopmentActionsController.getInstance(),
                                             (String) field.get(entity.getStageFourActions().get(i)));
                         }
                     }
                     if (list == null) {
             try {
-              method = AVALONActionChitController.class.getDeclaredMethod(
+              method = AVALONDevelopmentActionsController.class.getDeclaredMethod(
                   "getByCode", new Class[] { String.class });
             } catch (NoSuchMethodException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from Controller by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from Controller by code");
             }
             try {
-              field = AVALONActionChitEntity.class.getDeclaredField(
+              field = AVALONDevelopmentActionsEntity.class.getDeclaredField(
                   "code");
             } catch (NoSuchFieldException e) {
-              System.out.println("Cannot get embedded lookup Entity AVALONActionChitEntity from class by code");
+              System.out.println("Cannot get embedded lookup Entity AVALONDevelopmentActionsEntity from class by code");
             }
                         if (method != null
                                 && field != null) {
                             field.setAccessible(true);
                             if (field.get(entity.getStageFourActions().get(i)) != null) {
-                                list = (List<Resource<AVALONActionChitEntity>>) method
+                                list = (List<Resource<AVALONDevelopmentActionsEntity>>) method
                                         .invoke(
-                                                AVALONActionChitController
+                                                AVALONDevelopmentActionsController
                                                         .getInstance(),
                                                 (String) field
                                                         .get(entity.getStageFourActions().get(i)));
@@ -1389,14 +1382,14 @@ public class AVALONIoPcDataController {
                 } catch (SecurityException | IllegalArgumentException
                         | IllegalAccessException
                         | InvocationTargetException e) {
-              System.out.println("CANNOT get embedded lookup Entity AVALONActionChitEntity by name or code");
+              System.out.println("CANNOT get embedded lookup Entity AVALONDevelopmentActionsEntity by name or code");
                 }
                 if (list != null
                         && !list.isEmpty()) {
                     stageFourActions = list.get(0).getContent();
                 }
                 if (stageFourActions == null) {
-                    stageFourActions = (AVALONActionChitEntity) ((Resource) AVALONActionChitController
+                    stageFourActions = (AVALONDevelopmentActionsEntity) ((Resource) AVALONDevelopmentActionsController
                             .getInstance()
                             .save(entity.getStageFourActions().get(i)).get(0)).getContent();
                 }
@@ -1884,25 +1877,6 @@ public class AVALONIoPcDataController {
     public List<Resource<AVALONIoPcDataEntity>> getByStageThreeName(
             @PathVariable final String stageThreeName) {
         Iterator<AVALONIoPcDataEntity> iter = repository.findByStageThreeName(stageThreeName)
-                .iterator();
-        List<Resource<AVALONIoPcDataEntity>> resources =
-                new ArrayList<Resource<AVALONIoPcDataEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getIoPcDataResource(iter.next()));
-        }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONIoPcDataEntity}s that share a startingLocation.
-     * @param startingLocation the io_pc_data' startingLocation
-     * @return {@link List}<{@link Resource}<{@link AVALONIoPcDataEntity}>>
-     */
-    @RequestMapping(path = "starting_location/{startingLocation}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONIoPcDataEntity>> getByStartingLocation(
-            @PathVariable final String startingLocation) {
-        Iterator<AVALONIoPcDataEntity> iter = repository.findByStartingLocation(startingLocation)
                 .iterator();
         List<Resource<AVALONIoPcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoPcDataEntity>>();

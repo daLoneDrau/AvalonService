@@ -57,10 +57,4 @@ extends CrudRepository<AVALONIoPcDataEntity, Long> {
 	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
 	 */
 	List<AVALONIoPcDataEntity> findByStageThreeName(String stageThreeName);
-	/**
-	 * Retrieves a list of io pc datas by their startingLocation.
-	 * @param startingLocation the startingLocation
-	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
-	 */
-	List<AVALONIoPcDataEntity> findByStartingLocation(String startingLocation);
 }

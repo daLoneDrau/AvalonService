@@ -14,19 +14,21 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.osrapi.repositories")
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
-    /**
-     * Application entry point.
-     * @param args command-line arguments
-     */
-    public static void main(final String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected final SpringApplicationBuilder configure(
-            final SpringApplicationBuilder builder) {
-        return builder.sources(Application.class);
-    }
+	/**
+	 * Application entry point.
+	 * 
+	 * @param args
+	 *            command-line arguments
+	 */
+	public static void main(final String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected final SpringApplicationBuilder configure(final SpringApplicationBuilder builder) {
+		return builder.sources(Application.class);
+	}
 }

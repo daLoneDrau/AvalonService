@@ -95,26 +95,6 @@ public final class AVALONIoPcDataEntity {
         vulnerability = val;
     }
 
-    /** the startingLocation. */
-    @Column(name = "starting_location")
-    @JsonProperty("starting_location")
-    @NotNull
-    private String                    startingLocation;
-    /**
-     * Gets the startingLocation.
-     * @return {@link String}
-     */
-    public String getStartingLocation() {
-        return startingLocation;
-    }
-    /**
-     * Sets the startingLocation.
-     * @param val the new value
-     */
-    public void setStartingLocation(final String val) {
-        startingLocation = val;
-    }
-
     /** the stageThreeName. */
     @Column(name = "stage_three_name")
     @JsonProperty("stage_three_name")
@@ -351,118 +331,143 @@ public final class AVALONIoPcDataEntity {
     }
 
     /**
-     * the list of {@link AVALONActionChitEntity}s associated with this
+     * the list of startingLocation associated with this
      * {@link AVALONIoPcDataEntity}.
      */
-    @OneToMany(targetEntity = AVALONActionChitEntity.class,
+    @Column
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "io_pc_data_starting_location_lookup", schema = "avalon",
+  joinColumns = { @JoinColumn(name = "io_pc_data_id") })
+    @JsonProperty("starting_location")
+    private List<String>    startingLocation;
+    /**
+     * Gets the list of startingLocation.
+     * @return {@link List}<{@link String}>
+     */
+    public List<String> getStartingLocation() {
+        return startingLocation;
+    }
+    /**
+     * Sets the list of startingLocation.
+     * @param val the new value
+     */
+    public void setStartingLocation(final List<String> val) {
+        startingLocation = val;
+    }
+
+    /**
+     * the list of {@link AVALONDevelopmentActionsEntity}s associated with this
+     * {@link AVALONIoPcDataEntity}.
+     */
+    @OneToMany(targetEntity = AVALONDevelopmentActionsEntity.class,
       fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(name = "io_pc_data_stage_four_actions_lookup", schema = "avalon",
   joinColumns = @JoinColumn(name = "io_pc_data_id",
   referencedColumnName = "io_pc_data_id"),
-  inverseJoinColumns = @JoinColumn(name = "action_chit_id",
-  referencedColumnName = "action_chit_id"))
+  inverseJoinColumns = @JoinColumn(name = "development_actions_id",
+  referencedColumnName = "development_actions_id"))
     @JsonProperty("stage_four_actions")
-    private List<AVALONActionChitEntity>    stageFourActions;
+    private List<AVALONDevelopmentActionsEntity>    stageFourActions;
     /**
      * Gets the list of stageFourActionss.
-     * @return {@link List}<{@link AVALONActionChitEntity}>
+     * @return {@link List}<{@link AVALONDevelopmentActionsEntity}>
      */
-    public List<AVALONActionChitEntity> getStageFourActions() {
+    public List<AVALONDevelopmentActionsEntity> getStageFourActions() {
         return stageFourActions;
     }
     /**
      * Sets the list of stageFourActionss.
      * @param val the new value
      */
-    public void setStageFourActions(final List<AVALONActionChitEntity> val) {
+    public void setStageFourActions(final List<AVALONDevelopmentActionsEntity> val) {
         stageFourActions = val;
     }
 
     /**
-     * the list of {@link AVALONActionChitEntity}s associated with this
+     * the list of {@link AVALONDevelopmentActionsEntity}s associated with this
      * {@link AVALONIoPcDataEntity}.
      */
-    @OneToMany(targetEntity = AVALONActionChitEntity.class,
+    @OneToMany(targetEntity = AVALONDevelopmentActionsEntity.class,
       fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(name = "io_pc_data_stage_three_actions_lookup", schema = "avalon",
   joinColumns = @JoinColumn(name = "io_pc_data_id",
   referencedColumnName = "io_pc_data_id"),
-  inverseJoinColumns = @JoinColumn(name = "action_chit_id",
-  referencedColumnName = "action_chit_id"))
+  inverseJoinColumns = @JoinColumn(name = "development_actions_id",
+  referencedColumnName = "development_actions_id"))
     @JsonProperty("stage_three_actions")
-    private List<AVALONActionChitEntity>    stageThreeActions;
+    private List<AVALONDevelopmentActionsEntity>    stageThreeActions;
     /**
      * Gets the list of stageThreeActionss.
-     * @return {@link List}<{@link AVALONActionChitEntity}>
+     * @return {@link List}<{@link AVALONDevelopmentActionsEntity}>
      */
-    public List<AVALONActionChitEntity> getStageThreeActions() {
+    public List<AVALONDevelopmentActionsEntity> getStageThreeActions() {
         return stageThreeActions;
     }
     /**
      * Sets the list of stageThreeActionss.
      * @param val the new value
      */
-    public void setStageThreeActions(final List<AVALONActionChitEntity> val) {
+    public void setStageThreeActions(final List<AVALONDevelopmentActionsEntity> val) {
         stageThreeActions = val;
     }
 
     /**
-     * the list of {@link AVALONActionChitEntity}s associated with this
+     * the list of {@link AVALONDevelopmentActionsEntity}s associated with this
      * {@link AVALONIoPcDataEntity}.
      */
-    @OneToMany(targetEntity = AVALONActionChitEntity.class,
+    @OneToMany(targetEntity = AVALONDevelopmentActionsEntity.class,
       fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(name = "io_pc_data_stage_two_actions_lookup", schema = "avalon",
   joinColumns = @JoinColumn(name = "io_pc_data_id",
   referencedColumnName = "io_pc_data_id"),
-  inverseJoinColumns = @JoinColumn(name = "action_chit_id",
-  referencedColumnName = "action_chit_id"))
+  inverseJoinColumns = @JoinColumn(name = "development_actions_id",
+  referencedColumnName = "development_actions_id"))
     @JsonProperty("stage_two_actions")
-    private List<AVALONActionChitEntity>    stageTwoActions;
+    private List<AVALONDevelopmentActionsEntity>    stageTwoActions;
     /**
      * Gets the list of stageTwoActionss.
-     * @return {@link List}<{@link AVALONActionChitEntity}>
+     * @return {@link List}<{@link AVALONDevelopmentActionsEntity}>
      */
-    public List<AVALONActionChitEntity> getStageTwoActions() {
+    public List<AVALONDevelopmentActionsEntity> getStageTwoActions() {
         return stageTwoActions;
     }
     /**
      * Sets the list of stageTwoActionss.
      * @param val the new value
      */
-    public void setStageTwoActions(final List<AVALONActionChitEntity> val) {
+    public void setStageTwoActions(final List<AVALONDevelopmentActionsEntity> val) {
         stageTwoActions = val;
     }
 
     /**
-     * the list of {@link AVALONActionChitEntity}s associated with this
+     * the list of {@link AVALONDevelopmentActionsEntity}s associated with this
      * {@link AVALONIoPcDataEntity}.
      */
-    @OneToMany(targetEntity = AVALONActionChitEntity.class,
+    @OneToMany(targetEntity = AVALONDevelopmentActionsEntity.class,
       fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(name = "io_pc_data_stage_one_actions_lookup", schema = "avalon",
   joinColumns = @JoinColumn(name = "io_pc_data_id",
   referencedColumnName = "io_pc_data_id"),
-  inverseJoinColumns = @JoinColumn(name = "action_chit_id",
-  referencedColumnName = "action_chit_id"))
+  inverseJoinColumns = @JoinColumn(name = "development_actions_id",
+  referencedColumnName = "development_actions_id"))
     @JsonProperty("stage_one_actions")
-    private List<AVALONActionChitEntity>    stageOneActions;
+    private List<AVALONDevelopmentActionsEntity>    stageOneActions;
     /**
      * Gets the list of stageOneActionss.
-     * @return {@link List}<{@link AVALONActionChitEntity}>
+     * @return {@link List}<{@link AVALONDevelopmentActionsEntity}>
      */
-    public List<AVALONActionChitEntity> getStageOneActions() {
+    public List<AVALONDevelopmentActionsEntity> getStageOneActions() {
         return stageOneActions;
     }
     /**
      * Sets the list of stageOneActionss.
      * @param val the new value
      */
-    public void setStageOneActions(final List<AVALONActionChitEntity> val) {
+    public void setStageOneActions(final List<AVALONDevelopmentActionsEntity> val) {
         stageOneActions = val;
     }
 
