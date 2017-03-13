@@ -1773,6 +1773,25 @@ public class AVALONIoPcDataController {
         return resources;
     }
     /**
+     * Gets a list of {@link AVALONIoPcDataEntity}s that share a glyph.
+     * @param glyph the io_pc_data' glyph
+     * @return {@link List}<{@link Resource}<{@link AVALONIoPcDataEntity}>>
+     */
+    @RequestMapping(path = "glyph/{glyph}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoPcDataEntity>> getByGlyph(
+            @PathVariable final String glyph) {
+        Iterator<AVALONIoPcDataEntity> iter = repository.findByGlyph(glyph)
+                .iterator();
+        List<Resource<AVALONIoPcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoPcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoPcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
      * Gets a list of {@link AVALONIoPcDataEntity}s that share a gold.
      * @param gold the io_pc_data' gold
      * @return {@link List}<{@link Resource}<{@link AVALONIoPcDataEntity}>>
@@ -1849,6 +1868,25 @@ public class AVALONIoPcDataController {
         return resources;
     }
     /**
+     * Gets a list of {@link AVALONIoPcDataEntity}s that share a stageOneSpells.
+     * @param stageOneSpells the io_pc_data' stageOneSpells
+     * @return {@link List}<{@link Resource}<{@link AVALONIoPcDataEntity}>>
+     */
+    @RequestMapping(path = "stage_one_spells/{stageOneSpells}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoPcDataEntity>> getByStageOneSpells(
+            @PathVariable final Long stageOneSpells) {
+        Iterator<AVALONIoPcDataEntity> iter = repository.findByStageOneSpells(stageOneSpells)
+                .iterator();
+        List<Resource<AVALONIoPcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoPcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoPcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
      * Gets a list of {@link AVALONIoPcDataEntity}s that share a stageTwoName.
      * @param stageTwoName the io_pc_data' stageTwoName
      * @return {@link List}<{@link Resource}<{@link AVALONIoPcDataEntity}>>
@@ -1868,6 +1906,25 @@ public class AVALONIoPcDataController {
         return resources;
     }
     /**
+     * Gets a list of {@link AVALONIoPcDataEntity}s that share a stageTwoSpells.
+     * @param stageTwoSpells the io_pc_data' stageTwoSpells
+     * @return {@link List}<{@link Resource}<{@link AVALONIoPcDataEntity}>>
+     */
+    @RequestMapping(path = "stage_two_spells/{stageTwoSpells}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoPcDataEntity>> getByStageTwoSpells(
+            @PathVariable final Long stageTwoSpells) {
+        Iterator<AVALONIoPcDataEntity> iter = repository.findByStageTwoSpells(stageTwoSpells)
+                .iterator();
+        List<Resource<AVALONIoPcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoPcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoPcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
      * Gets a list of {@link AVALONIoPcDataEntity}s that share a stageThreeName.
      * @param stageThreeName the io_pc_data' stageThreeName
      * @return {@link List}<{@link Resource}<{@link AVALONIoPcDataEntity}>>
@@ -1877,6 +1934,44 @@ public class AVALONIoPcDataController {
     public List<Resource<AVALONIoPcDataEntity>> getByStageThreeName(
             @PathVariable final String stageThreeName) {
         Iterator<AVALONIoPcDataEntity> iter = repository.findByStageThreeName(stageThreeName)
+                .iterator();
+        List<Resource<AVALONIoPcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoPcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoPcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
+     * Gets a list of {@link AVALONIoPcDataEntity}s that share a stageThreeSpells.
+     * @param stageThreeSpells the io_pc_data' stageThreeSpells
+     * @return {@link List}<{@link Resource}<{@link AVALONIoPcDataEntity}>>
+     */
+    @RequestMapping(path = "stage_three_spells/{stageThreeSpells}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoPcDataEntity>> getByStageThreeSpells(
+            @PathVariable final Long stageThreeSpells) {
+        Iterator<AVALONIoPcDataEntity> iter = repository.findByStageThreeSpells(stageThreeSpells)
+                .iterator();
+        List<Resource<AVALONIoPcDataEntity>> resources =
+                new ArrayList<Resource<AVALONIoPcDataEntity>>();
+        while (iter.hasNext()) {
+            resources.add(getIoPcDataResource(iter.next()));
+        }
+        iter = null;
+        return resources;
+    }
+    /**
+     * Gets a list of {@link AVALONIoPcDataEntity}s that share a stageFourSpells.
+     * @param stageFourSpells the io_pc_data' stageFourSpells
+     * @return {@link List}<{@link Resource}<{@link AVALONIoPcDataEntity}>>
+     */
+    @RequestMapping(path = "stage_four_spells/{stageFourSpells}",
+            method = RequestMethod.GET)
+    public List<Resource<AVALONIoPcDataEntity>> getByStageFourSpells(
+            @PathVariable final Long stageFourSpells) {
+        Iterator<AVALONIoPcDataEntity> iter = repository.findByStageFourSpells(stageFourSpells)
                 .iterator();
         List<Resource<AVALONIoPcDataEntity>> resources =
                 new ArrayList<Resource<AVALONIoPcDataEntity>>();

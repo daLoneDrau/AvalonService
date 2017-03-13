@@ -22,6 +22,12 @@ extends CrudRepository<AVALONIoPcDataEntity, Long> {
 	 */
 	List<AVALONIoPcDataEntity> findByEvaluation(String evaluation);
 	/**
+	 * Retrieves a list of io pc datas by their glyph.
+	 * @param glyph the glyph
+	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
+	 */
+	List<AVALONIoPcDataEntity> findByGlyph(String glyph);
+	/**
 	 * Retrieves a list of io pc datas by their gold.
 	 * @param gold the gold
 	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
@@ -46,15 +52,39 @@ extends CrudRepository<AVALONIoPcDataEntity, Long> {
 	 */
 	List<AVALONIoPcDataEntity> findByStageOneName(String stageOneName);
 	/**
+	 * Retrieves a list of io pc datas by their stageOneSpells.
+	 * @param stageOneSpells the stageOneSpells
+	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
+	 */
+	List<AVALONIoPcDataEntity> findByStageOneSpells(Long stageOneSpells);
+	/**
 	 * Retrieves a list of io pc datas by their stageTwoName.
 	 * @param stageTwoName the stageTwoName
 	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
 	 */
 	List<AVALONIoPcDataEntity> findByStageTwoName(String stageTwoName);
 	/**
+	 * Retrieves a list of io pc datas by their stageTwoSpells.
+	 * @param stageTwoSpells the stageTwoSpells
+	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
+	 */
+	List<AVALONIoPcDataEntity> findByStageTwoSpells(Long stageTwoSpells);
+	/**
 	 * Retrieves a list of io pc datas by their stageThreeName.
 	 * @param stageThreeName the stageThreeName
 	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
 	 */
 	List<AVALONIoPcDataEntity> findByStageThreeName(String stageThreeName);
+	/**
+	 * Retrieves a list of io pc datas by their stageThreeSpells.
+	 * @param stageThreeSpells the stageThreeSpells
+	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
+	 */
+	List<AVALONIoPcDataEntity> findByStageThreeSpells(Long stageThreeSpells);
+	/**
+	 * Retrieves a list of io pc datas by their stageFourSpells.
+	 * @param stageFourSpells the stageFourSpells
+	 * @return {@link List}<{@link AVALONIoPcDataEntity}>
+	 */
+	List<AVALONIoPcDataEntity> findByStageFourSpells(Long stageFourSpells);
 }

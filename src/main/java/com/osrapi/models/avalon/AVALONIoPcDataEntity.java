@@ -95,6 +95,46 @@ public final class AVALONIoPcDataEntity {
         vulnerability = val;
     }
 
+    /** the stageFourSpells. */
+    @Column(name = "stage_four_spells")
+    @JsonProperty("stage_four_spells")
+    
+    private Long                    stageFourSpells;
+    /**
+     * Gets the stageFourSpells.
+     * @return {@link Long}
+     */
+    public Long getStageFourSpells() {
+        return stageFourSpells;
+    }
+    /**
+     * Sets the stageFourSpells.
+     * @param val the new value
+     */
+    public void setStageFourSpells(final Long val) {
+        stageFourSpells = val;
+    }
+
+    /** the stageThreeSpells. */
+    @Column(name = "stage_three_spells")
+    @JsonProperty("stage_three_spells")
+    
+    private Long                    stageThreeSpells;
+    /**
+     * Gets the stageThreeSpells.
+     * @return {@link Long}
+     */
+    public Long getStageThreeSpells() {
+        return stageThreeSpells;
+    }
+    /**
+     * Sets the stageThreeSpells.
+     * @param val the new value
+     */
+    public void setStageThreeSpells(final Long val) {
+        stageThreeSpells = val;
+    }
+
     /** the stageThreeName. */
     @Column(name = "stage_three_name")
     @JsonProperty("stage_three_name")
@@ -115,6 +155,26 @@ public final class AVALONIoPcDataEntity {
         stageThreeName = val;
     }
 
+    /** the stageTwoSpells. */
+    @Column(name = "stage_two_spells")
+    @JsonProperty("stage_two_spells")
+    
+    private Long                    stageTwoSpells;
+    /**
+     * Gets the stageTwoSpells.
+     * @return {@link Long}
+     */
+    public Long getStageTwoSpells() {
+        return stageTwoSpells;
+    }
+    /**
+     * Sets the stageTwoSpells.
+     * @param val the new value
+     */
+    public void setStageTwoSpells(final Long val) {
+        stageTwoSpells = val;
+    }
+
     /** the stageTwoName. */
     @Column(name = "stage_two_name")
     @JsonProperty("stage_two_name")
@@ -133,6 +193,26 @@ public final class AVALONIoPcDataEntity {
      */
     public void setStageTwoName(final String val) {
         stageTwoName = val;
+    }
+
+    /** the stageOneSpells. */
+    @Column(name = "stage_one_spells")
+    @JsonProperty("stage_one_spells")
+    
+    private Long                    stageOneSpells;
+    /**
+     * Gets the stageOneSpells.
+     * @return {@link Long}
+     */
+    public Long getStageOneSpells() {
+        return stageOneSpells;
+    }
+    /**
+     * Sets the stageOneSpells.
+     * @param val the new value
+     */
+    public void setStageOneSpells(final Long val) {
+        stageOneSpells = val;
     }
 
     /** the stageOneName. */
@@ -213,6 +293,26 @@ public final class AVALONIoPcDataEntity {
      */
     public void setGold(final Float val) {
         gold = val;
+    }
+
+    /** the glyph. */
+    @Column(name = "glyph")
+    @JsonProperty("glyph")
+    @NotNull
+    private String                    glyph;
+    /**
+     * Gets the glyph.
+     * @return {@link String}
+     */
+    public String getGlyph() {
+        return glyph;
+    }
+    /**
+     * Sets the glyph.
+     * @param val the new value
+     */
+    public void setGlyph(final String val) {
+        glyph = val;
     }
 
     /** the gender. */

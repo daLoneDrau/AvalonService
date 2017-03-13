@@ -134,24 +134,24 @@ public final class AVALONActionChitEntity {
     }
 
     /** the magicType. */
-    @ManyToOne(targetEntity = AVALONMagicColorEntity.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = AVALONMagicTypeEntity.class, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "magicType")
     @JsonProperty("magic_type")
   
-    private AVALONMagicColorEntity    magicType;
+    private AVALONMagicTypeEntity    magicType;
     /**
      * Gets the magicType.
-     * @return {@link AVALONMagicColorEntity}
+     * @return {@link AVALONMagicTypeEntity}
      */
-    public AVALONMagicColorEntity getMagicType() {
+    public AVALONMagicTypeEntity getMagicType() {
         return magicType;
     }
     /**
      * Sets the magicType.
      * @param val the new value
      */
-    public void setMagicType(final AVALONMagicColorEntity val) {
+    public void setMagicType(final AVALONMagicTypeEntity val) {
         magicType = val;
     }
 

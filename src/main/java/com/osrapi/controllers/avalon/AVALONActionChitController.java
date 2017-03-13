@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.osrapi.models.avalon.AVALONActionChitEntity;
 import com.osrapi.models.avalon.AVALONActionTypeEntity;
 import com.osrapi.models.avalon.AVALONVulnerabilityEntity;
-import com.osrapi.models.avalon.AVALONMagicColorEntity;
+import com.osrapi.models.avalon.AVALONMagicTypeEntity;
 
 import com.osrapi.repositories.avalon.AVALONActionChitRepository;
 
@@ -385,33 +385,33 @@ public class AVALONActionChitController {
 
   private void setMagicTypeIdFromRepository(
       final AVALONActionChitEntity entity) {
-    AVALONMagicColorEntity memberEntity = null;
-    List<Resource<AVALONMagicColorEntity>> list = null;
+    AVALONMagicTypeEntity memberEntity = null;
+    List<Resource<AVALONMagicTypeEntity>> list = null;
     try {
       Method method = null;
       Field field = null;
       try {
-        method = AVALONMagicColorController.class.getDeclaredMethod(
+        method = AVALONMagicTypeController.class.getDeclaredMethod(
             "getByName", new Class[] { String.class });
-        field = AVALONMagicColorEntity.class.getDeclaredField("name");
+        field = AVALONMagicTypeEntity.class.getDeclaredField("name");
       } catch (NoSuchMethodException | NoSuchFieldException e) {
       }
       if (method != null
           && field != null) {
         field.setAccessible(true);
         if (field.get(entity.getMagicType()) != null) {
-          list = (List<Resource<AVALONMagicColorEntity>>) method
+          list = (List<Resource<AVALONMagicTypeEntity>>) method
               .invoke(
-                  AVALONMagicColorController.getInstance(),
+                  AVALONMagicTypeController.getInstance(),
                   (String) field
                       .get(entity.getMagicType()));
         }
       }
       if (list == null) {
         try {
-          method = AVALONMagicColorController.class.getDeclaredMethod(
+          method = AVALONMagicTypeController.class.getDeclaredMethod(
               "getByCode", new Class[] { String.class });
-          field = AVALONMagicColorEntity.class
+          field = AVALONMagicTypeEntity.class
               .getDeclaredField("code");
         } catch (NoSuchMethodException | NoSuchFieldException e) {
         }
@@ -419,8 +419,8 @@ public class AVALONActionChitController {
             && field != null) {
           field.setAccessible(true);
           if (field.get(entity.getMagicType()) != null) {
-            list = (List<Resource<AVALONMagicColorEntity>>)
-                method.invoke(AVALONMagicColorController
+            list = (List<Resource<AVALONMagicTypeEntity>>)
+                method.invoke(AVALONMagicTypeController
                     .getInstance(),(String) field.get(
                         entity.getMagicType()));
           }
@@ -437,8 +437,8 @@ public class AVALONActionChitController {
       memberEntity = list.get(0).getContent();
     }
     if (memberEntity == null) {
-      memberEntity = (AVALONMagicColorEntity)
-          ((Resource) AVALONMagicColorController.getInstance().save(
+      memberEntity = (AVALONMagicTypeEntity)
+          ((Resource) AVALONMagicTypeController.getInstance().save(
               entity.getMagicType()).get(0)).getContent();
     }
     entity.setMagicType(memberEntity);
