@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.osrapi.models.avalon.AVALONHexNodeEntity;
+import com.osrapi.models.avalon.AVALONVector3Entity;
+import com.osrapi.models.avalon.AVALONHexTerrainTypeEntity;
 
 import com.osrapi.repositories.avalon.AVALONHexNodeRepository;
 
@@ -122,7 +124,17 @@ public class AVALONHexNodeController {
     @RequestMapping(method = RequestMethod.POST)
     public List<Resource<AVALONHexNodeEntity>> save(
             @RequestBody final AVALONHexNodeEntity entity) {
-    
+            if (entity.getLocation() != null
+        && entity.getLocation().getId() == null) {
+      setLocationIdFromRepository(entity);
+        }
+
+        if (entity.getType() != null
+        && entity.getType().getId() == null) {
+      setTypeIdFromRepository(entity);
+        }
+
+
     
         AVALONHexNodeEntity savedEntity = repository.save(entity);
         List<Resource<AVALONHexNodeEntity>> list =
@@ -217,7 +229,17 @@ public class AVALONHexNodeController {
         if (entity.getId() == null) {
             setIdFromRepository(entity);
         }
-    
+            if (entity.getLocation() != null
+        && entity.getLocation().getId() == null) {
+      setLocationIdFromRepository(entity);
+        }
+
+        if (entity.getType() != null
+        && entity.getType().getId() == null) {
+      setTypeIdFromRepository(entity);
+        }
+
+
     
         AVALONHexNodeEntity savedEntity = repository.save(entity);
         List<Resource<AVALONHexNodeEntity>> list = getById(
@@ -226,54 +248,141 @@ public class AVALONHexNodeController {
         return list;
     }
 
-    /**
-     * Gets a list of {@link AVALONHexNodeEntity}s that share a description.
-     * @param description the hex_node' description
-     * @return {@link List}<{@link Resource}<{@link AVALONHexNodeEntity}>>
-     */
-    @RequestMapping(path = "description/{description}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONHexNodeEntity>> getByDescription(
-            @PathVariable final String description) {
-        Iterator<AVALONHexNodeEntity> iter = repository.findByDescription(description)
-                .iterator();
-        List<Resource<AVALONHexNodeEntity>> resources =
-                new ArrayList<Resource<AVALONHexNodeEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getHexNodeResource(iter.next()));
+  private void setLocationIdFromRepository(
+      final AVALONHexNodeEntity entity) {
+    AVALONVector3Entity memberEntity = null;
+    List<Resource<AVALONVector3Entity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONVector3Controller.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONVector3Entity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getLocation()) != null) {
+          list = (List<Resource<AVALONVector3Entity>>) method
+              .invoke(
+                  AVALONVector3Controller.getInstance(),
+                  (String) field
+                      .get(entity.getLocation()));
         }
-        iter = null;
-        return resources;
-    }
-    /**
-     * Gets a list of {@link AVALONHexNodeEntity}s that share a flag.
-     * @param flag the hex_node' flag
-     * @return {@link List}<{@link Resource}<{@link AVALONHexNodeEntity}>>
-     */
-    @RequestMapping(path = "flag/{flag}",
-            method = RequestMethod.GET)
-    public List<Resource<AVALONHexNodeEntity>> getByFlag(
-            @PathVariable final Long flag) {
-        Iterator<AVALONHexNodeEntity> iter = repository.findByFlag(flag)
-                .iterator();
-        List<Resource<AVALONHexNodeEntity>> resources =
-                new ArrayList<Resource<AVALONHexNodeEntity>>();
-        while (iter.hasNext()) {
-            resources.add(getHexNodeResource(iter.next()));
+      }
+      if (list == null) {
+        try {
+          method = AVALONVector3Controller.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONVector3Entity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
         }
-        iter = null;
-        return resources;
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getLocation()) != null) {
+            list = (List<Resource<AVALONVector3Entity>>)
+                method.invoke(AVALONVector3Controller
+                    .getInstance(),(String) field.get(
+                        entity.getLocation()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
     }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONVector3Entity)
+          ((Resource) AVALONVector3Controller.getInstance().save(
+              entity.getLocation()).get(0)).getContent();
+    }
+    entity.setLocation(memberEntity);
+    list = null;
+    }
+
+  private void setTypeIdFromRepository(
+      final AVALONHexNodeEntity entity) {
+    AVALONHexTerrainTypeEntity memberEntity = null;
+    List<Resource<AVALONHexTerrainTypeEntity>> list = null;
+    try {
+      Method method = null;
+      Field field = null;
+      try {
+        method = AVALONHexTerrainTypeController.class.getDeclaredMethod(
+            "getByName", new Class[] { String.class });
+        field = AVALONHexTerrainTypeEntity.class.getDeclaredField("name");
+      } catch (NoSuchMethodException | NoSuchFieldException e) {
+      }
+      if (method != null
+          && field != null) {
+        field.setAccessible(true);
+        if (field.get(entity.getType()) != null) {
+          list = (List<Resource<AVALONHexTerrainTypeEntity>>) method
+              .invoke(
+                  AVALONHexTerrainTypeController.getInstance(),
+                  (String) field
+                      .get(entity.getType()));
+        }
+      }
+      if (list == null) {
+        try {
+          method = AVALONHexTerrainTypeController.class.getDeclaredMethod(
+              "getByCode", new Class[] { String.class });
+          field = AVALONHexTerrainTypeEntity.class
+              .getDeclaredField("code");
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+        }
+        if (method != null
+            && field != null) {
+          field.setAccessible(true);
+          if (field.get(entity.getType()) != null) {
+            list = (List<Resource<AVALONHexTerrainTypeEntity>>)
+                method.invoke(AVALONHexTerrainTypeController
+                    .getInstance(),(String) field.get(
+                        entity.getType()));
+          }
+        }
+      }
+      method = null;
+      field = null;
+    } catch (SecurityException | IllegalArgumentException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+    }
+    if (list != null
+        && !list.isEmpty()) {
+      memberEntity = list.get(0).getContent();
+    }
+    if (memberEntity == null) {
+      memberEntity = (AVALONHexTerrainTypeEntity)
+          ((Resource) AVALONHexTerrainTypeController.getInstance().save(
+              entity.getType()).get(0)).getContent();
+    }
+    entity.setType(memberEntity);
+    list = null;
+    }
+
+
     /**
-     * Gets a list of {@link AVALONHexNodeEntity}s that share a name.
-     * @param name the hex_node' name
+     * Gets a list of {@link AVALONHexNodeEntity}s that share a code.
+     * @param code the hex_node' code
      * @return {@link List}<{@link Resource}<{@link AVALONHexNodeEntity}>>
      */
-    @RequestMapping(path = "name/{name}",
+    @RequestMapping(path = "code/{code}",
             method = RequestMethod.GET)
-    public List<Resource<AVALONHexNodeEntity>> getByName(
-            @PathVariable final String name) {
-        Iterator<AVALONHexNodeEntity> iter = repository.findByName(name)
+    public List<Resource<AVALONHexNodeEntity>> getByCode(
+            @PathVariable final String code) {
+        Iterator<AVALONHexNodeEntity> iter = repository.findByCode(code)
                 .iterator();
         List<Resource<AVALONHexNodeEntity>> resources =
                 new ArrayList<Resource<AVALONHexNodeEntity>>();

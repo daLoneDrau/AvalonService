@@ -16,21 +16,9 @@ import com.osrapi.models.avalon.AVALONHexNodeEntity;
 public interface AVALONHexNodeRepository
 extends CrudRepository<AVALONHexNodeEntity, Long> {
 	/**
-	 * Retrieves a list of hex nodes by their description.
-	 * @param description the description
+	 * Retrieves a list of hex nodes by their code.
+	 * @param code the code
 	 * @return {@link List}<{@link AVALONHexNodeEntity}>
 	 */
-	List<AVALONHexNodeEntity> findByDescription(String description);
-	/**
-	 * Retrieves a list of hex nodes by their flag.
-	 * @param flag the flag
-	 * @return {@link List}<{@link AVALONHexNodeEntity}>
-	 */
-	List<AVALONHexNodeEntity> findByFlag(Long flag);
-	/**
-	 * Retrieves a list of hex nodes by their name.
-	 * @param name the name
-	 * @return {@link List}<{@link AVALONHexNodeEntity}>
-	 */
-	List<AVALONHexNodeEntity> findByName(String name);
+	List<AVALONHexNodeEntity> findByCode(String code);
 }

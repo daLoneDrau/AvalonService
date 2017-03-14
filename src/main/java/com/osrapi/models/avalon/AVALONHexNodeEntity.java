@@ -73,64 +73,68 @@ public final class AVALONHexNodeEntity {
         id = val;
     }
 
-    /** the name. */
-    @Column(name = "name")
-    @JsonProperty("name")
+    /** the code. */
+    @Column(name = "code")
+    @JsonProperty("code")
     @NotNull
-    private String                    name;
+    private String                    code;
     /**
-     * Gets the name.
+     * Gets the code.
      * @return {@link String}
      */
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
     /**
-     * Sets the name.
+     * Sets the code.
      * @param val the new value
      */
-    public void setName(final String val) {
-        name = val;
+    public void setCode(final String val) {
+        code = val;
     }
 
-    /** the flag. */
-    @Column(name = "flag")
-    @JsonProperty("flag")
-    @NotNull
-    private long                    flag;
+    /** the type. */
+    @ManyToOne(targetEntity = AVALONHexTerrainTypeEntity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "type")
+    @JsonProperty("type")
+  @NotNull
+    private AVALONHexTerrainTypeEntity    type;
     /**
-     * Gets the flag.
-     * @return {@link long}
+     * Gets the type.
+     * @return {@link AVALONHexTerrainTypeEntity}
      */
-    public long getFlag() {
-        return flag;
+    public AVALONHexTerrainTypeEntity getType() {
+        return type;
     }
     /**
-     * Sets the flag.
+     * Sets the type.
      * @param val the new value
      */
-    public void setFlag(final long val) {
-        flag = val;
+    public void setType(final AVALONHexTerrainTypeEntity val) {
+        type = val;
     }
 
-    /** the description. */
-    @Column(name = "description")
-    @JsonProperty("description")
-    @NotNull
-    private String                    description;
+    /** the location. */
+    @ManyToOne(targetEntity = AVALONVector3Entity.class, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "location")
+    @JsonProperty("location")
+  @NotNull
+    private AVALONVector3Entity    location;
     /**
-     * Gets the description.
-     * @return {@link String}
+     * Gets the location.
+     * @return {@link AVALONVector3Entity}
      */
-    public String getDescription() {
-        return description;
+    public AVALONVector3Entity getLocation() {
+        return location;
     }
     /**
-     * Sets the description.
+     * Sets the location.
      * @param val the new value
      */
-    public void setDescription(final String val) {
-        description = val;
+    public void setLocation(final AVALONVector3Entity val) {
+        location = val;
     }
 
 }
